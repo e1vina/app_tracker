@@ -22,6 +22,11 @@ const listStyles={
 }
 
 const Navigation = () => {
+   const scrollToInfo = (e) => {
+    e.preventDefault()
+    document.getElementById("info").scrollIntoView({ behavior: "smooth" })
+  }
+
   return (
     <div className='Navigation' style={navigationStyles}>   
         <Link to="/" className='logo'>
@@ -29,7 +34,7 @@ const Navigation = () => {
             EXTract</Link>
         <ul className='Navlist' style={listStyles}>
             <li><Link to="/" className='ref'>Home</Link></li>
-            <li><Link to="/about" className='ref'>About</Link></li>
+            <li><a href="#info" onClick={scrollToInfo} className='ref'>About</a></li>
             <li><Link to="/program" className='ref'>programs</Link></li>
             <li><Link to="/login" className='ref log'>Log in</Link></li>
             <li><Link to="/signup" className='ref sign'>Sign up</Link></li>

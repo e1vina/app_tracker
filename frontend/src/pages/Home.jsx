@@ -1,5 +1,7 @@
 import Top from "../components/Top"
 import Image from "../assets/top.png"
+import Rates from "../components/Rates";
+import Info from "../components/Info";
 
 const imageStyle = {
   display: "block",
@@ -12,6 +14,8 @@ const Home = () => {
     <div>
       <Top />
        <img src={Image} alt="" height={576} width={1024} style={imageStyle} />
+      <Rates />
+      <Info />
     </div>
   )
 }

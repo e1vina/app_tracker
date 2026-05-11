@@ -1,0 +1,47 @@
+.card-container{
+    grid-template-columns: repeat(3, 1fr);
+}
+
+#info{
+    /* background-color: #C8C6E8; */
+    background-color: #EEEDFE;
+    padding: 80px 140px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.icon-image {
+    height: 60px;
+    width: 60px;
+}
+
+.about{
+    color: #534AB7;
+    font-size: 48px;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.about-heading{
+    font-size: 24px;
+    padding-left: 140px ;
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+
+.card h3{
+    font-size: 25px;
+    color: #6c64b2;
+    font-weight: bold;
+}
+
+.card p{
+    line-height: 25px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.card-container-2{
+    margin-top: 30px;
+}
