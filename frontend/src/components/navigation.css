@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Arimo:ital,wght@0,400..700;1,400..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    
+}
+
+a{
+    text-decoration: none;
+}
+
+
+.logo {
+    font-size: 24px;
+    color: black;
+    margin: 10px 30px;
+    font-family: "Anton", sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-image {
+    height: 50px;
+    width: 50px;
+}
+
+
+.ref{
+    color: black;
+}
+
+.log{
+    background-color: #EEEDFE;
+    padding: 8px 21px;
+    border-radius: 4px;
+    border: 1px solid #AFA9EC;
+}
+
+.sign {
+    background: #534AB7;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
