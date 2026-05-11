@@ -31,7 +31,7 @@ const Navigation = () => {
     <div className='Navigation' style={navigationStyles}>   
         <Link to="/" className='logo'>
             <img src={image} alt="logo" className='logo-image'/> 
-            EXTract</Link>
+            EXTrack</Link>
         <ul className='Navlist' style={listStyles}>
             <li><Link to="/" className='ref'>Home</Link></li>
             <li><a href="#info" onClick={scrollToInfo} className='ref'>About</a></li>
