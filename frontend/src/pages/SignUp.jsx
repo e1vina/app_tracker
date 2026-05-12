@@ -1,11 +1,13 @@
 import SignLogNavigation from "../components/SignLogNavigation"
+import Sign from "../components/Sign"
 
 const signUp = () => {
     return (
         <div>           
             <SignLogNavigation />
+            <Sign />
             
-            <h1>Sign Up Page</h1>
+            
         </div>
     )
 }                

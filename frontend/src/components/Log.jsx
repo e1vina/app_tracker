@@ -67,6 +67,7 @@ const Log = () => {
             Create One Free
           </Link>{" "}
         </p>
+
         <form onSubmit={handleSubmit}>
           <input
             className="input"
@@ -86,17 +87,17 @@ const Log = () => {
             onChange={handleChange}
           />
           <br />
-          <button type="submit" style={buttonStyles}>
+          <button type="submit"  className="signin-btn" style={buttonStyles}>
             Log in
           </button>
         </form>
         <p className="no-account" style={{marginTop: '15px'}}>
           By signing in, you agree to our{" "}
-          <a href="" className="">
+          <a href="" className="signin-link">
             Terms of Service
           </a>{" "}
           and{" "}
-          <a href="" className="">
+          <a href="" className="signin-link">
             Privacy Policy
           </a>
           .
