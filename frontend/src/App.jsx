@@ -16,9 +16,10 @@ const App = () => {
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/program" element={<Program />} />
+          </Route>
+
             <Route path="/login" element={<LogIn />} />
             <Route path="/signup" element={<SignUp />} />
-          </Route>
         </Routes>
       </Router>
     </div>

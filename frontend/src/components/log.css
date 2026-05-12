@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+    
+}
+
+.logo {
+    font-size: 20px;
+    color: black;
+    margin: 10px 30px;
+    font-family: "Anton", sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-image {
+    height: 50px;
+    width: 50px;
+}
+
+.ref{
+    color: blue;
+    text-decoration: none;
+}

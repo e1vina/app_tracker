@@ -1,8 +1,12 @@
+import SignLogNavigation from "../components/SignLogNavigation"
+import Log from "../components/Log"
 
 const logIn = () => {
     return (
         <div>   
-            <h1>Log In Page</h1>
+            <SignLogNavigation />
+            <Log/>
+
         </div>
     )
 }
