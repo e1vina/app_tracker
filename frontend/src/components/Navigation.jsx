@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const navigationStyles= {
   width: 'auto',
-  margin: '20px 19px',
+  margin: '10px 2px',
 //   background: '#333',
   display: 'flex',
   justifyContent:'space-between',

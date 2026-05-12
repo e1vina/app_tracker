@@ -7,11 +7,24 @@
 .logo {
     font-size: 20px;
     color: black;
-    margin: 10px 30px;
+    margin: 10px 2px;
     font-family: "Anton", sans-serif;
     display: flex;
     align-items: center;
     gap: 8px;
+    font-weight: 300;
+}
+
+.split-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 22px;
+  font-family: "Anton", sans-serif;
+  color: #000000;
+  /* margin: 0 0 30px 0; */
+   margin: 10px 7px;
+  /* padding-left: 0; */
 }
 
 .logo-image {
@@ -19,7 +32,73 @@
     width: 50px;
 }
 
-.ref{
-    color: blue;
+.blue-link, .blue-link:visited{
+    color: #39065c;
     text-decoration: none;
 }
+
+.container-section {
+  display: flex;
+  min-height: calc(100vh - 80px); /* fills remaining height: below */
+}
+
+.split-text{
+    background: #534AB7;
+    color: #EEEDFE;
+    padding: 20px;
+    padding-bottom: 100px;
+}
+
+.split-text h2{
+    font-size: 30px;
+    margin-bottom: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-shadow: #39065c 1px 1px 2px;
+}
+
+.split-text p{
+    font-size: 13px;
+    margin-bottom: 25px;
+    flex: 1;
+}
+
+.text-body{
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: #ffffff1f;
+    color: #CECBF6;
+    margin-bottom: 8px;
+    width: fit-content;
+}
+
+.value-text {
+  align-content: center;
+  /* padding: 0 200px 0 5rem; */
+  padding: 100px;
+  flex: 1;
+
+  background-color: #f7f6f2;
+}
+
+.value-text h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.no-account {
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.input {
+  padding: 10px;
+  margin: 20px 0 10px 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
