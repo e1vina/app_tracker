@@ -53,7 +53,7 @@ const Sign = () => {
     }
 
     console.log(formData);
-    navigate("/dashboard");
+    navigate("/login");
   };
 
   return (
