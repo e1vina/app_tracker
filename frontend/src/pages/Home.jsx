@@ -3,6 +3,7 @@ import Top from "../components/Top"
 import Image from "../assets/top.png"
 import Rates from "../components/Rates"
 import Info from "../components/Info"
+import HomeProgramCard from "../components/HomeProgramCard"
 import "./home.css"
 
 const Home = () => {
@@ -20,6 +21,7 @@ const Home = () => {
       </section>
       <Rates />
       <Info />
+      <HomeProgramCard />
     </div>
   )
 }

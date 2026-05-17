@@ -1,7 +1,10 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import "../components/profile.css"
 
 const Profile = () => {
+  const navigate = useNavigate()
+
   const [formData, setFormData] = useState({
     firstName: "Adaeze",
     lastName: "Okonkwo",
@@ -19,8 +22,14 @@ const Profile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(formData)
+    localStorage.setItem("user", JSON.stringify(formData))
     alert("Profile saved!")
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem("token")
+    localStorage.removeItem("user")
+    navigate("/")
   }
 
   return (
@@ -133,6 +142,11 @@ const Profile = () => {
         <button type="submit" className="save-btn">Save changes</button>
 
       </form>
+
+      <button onClick={handleLogout} className="logout-btn">
+        Log out
+      </button>
+
     </div>
   )
 }

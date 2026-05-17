@@ -16,10 +16,14 @@
   text-align: center;
   line-height: 1.12;
   font-size: 2.5rem;
-  /* padding: 10px; */
+}
+
+.Track{
+  margin-bottom: 10px;
 }
 
 .all {
+  margin-top: 10px;
   margin-bottom: 30px;
 }
 
@@ -37,10 +41,10 @@
 }
 
 .hero_tag {
-  padding: 12px 40px;
+  padding: 8px 64px;
   font-size: 1rem;
   font-weight: 600;
-  border: 1px solid #afa9ec;
+  border: 0.5px solid #afa9ec;
   border-radius: 999px;
   background: #eeedfe;
   color: #3c3489;
@@ -70,5 +74,12 @@
 
   .all {
     margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 380px){
+  .hero_tag{
+    padding: 4px 8px;
+    font-size: 0.57rem;
   }
 }

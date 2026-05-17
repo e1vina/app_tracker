@@ -112,3 +112,31 @@
 .save-btn:hover {
   background: #3C3489;
 }
+
+.logout-btn {
+  margin-top: 16px;
+  padding: 10px 24px;
+  background: #A32D2D;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: "Arial", sans-serif;
+  width: 100%;
+  max-width: 700px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.logout-btn:hover {
+  background: #791F1F;
+}
+
+@media (max-width: 460px){
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}

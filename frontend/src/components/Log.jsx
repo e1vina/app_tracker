@@ -1,25 +1,25 @@
-import "./log.css"
-import image from "../assets/logo_light.svg"
-import { Link, useNavigate } from "react-router-dom"
-import { useState } from "react"
+import "./log.css";
+import image from "../assets/logo_light.svg";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Log = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-  })
+  });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log(formData)
-    navigate("/dashboard")
-  }
+    e.preventDefault();
+    console.log(formData);
+    navigate("/dashboard");
+  };
 
   return (
     <div className="container-section">
@@ -29,8 +29,10 @@ const Log = () => {
           EXTrack
         </div>
 
-        <h2>Welcome back,</h2>
-        <h2>Your applications are waiting!</h2>
+        <h2 style={{ marginBottom: "0", lineHeight: "1.1" }}>Welcome back,</h2>
+        <h2 style={{ marginTop: "0", lineHeight: "1.1" }}>
+          Your applications are waiting!
+        </h2>
         <p className="pick">
           Pick up right where you left off — deadlines, documents, and decisions
           all in one place.
@@ -84,6 +86,6 @@ const Log = () => {
         </div>
       </div>
     </div>
-  )
-}
-export default Log
+  );
+};
+export default Log;

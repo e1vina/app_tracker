@@ -50,8 +50,8 @@ const Sign = () => {
           EXTrack
         </div>
 
-        <h2>Start tracking</h2>
-        <h2>your study abroad journey today!</h2>
+        <h2 style={{ marginBottom: "0", lineHeight: "1.1" }}>Start tracking</h2>
+        <h2 style={{ marginTop: "0", lineHeight: "1.1" }}>your study abroad journey today!</h2>
         <p className="pick">
           Set up takes under 2 minutes. Add your first application right after —
           no credit card needed.
