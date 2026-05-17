@@ -78,3 +78,15 @@
 .view-all .ref:hover {
     text-decoration: underline;
 }
+
+@media (max-width:759px){
+    .program-card {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .program-card {
+        grid-template-columns: 1fr;
+    }
+}

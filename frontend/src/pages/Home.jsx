@@ -4,6 +4,7 @@ import Image from "../assets/top.png"
 import Rates from "../components/Rates"
 import Info from "../components/Info"
 import HomeProgramCard from "../components/HomeProgramCard"
+import Footer from "../components/Footer"
 import "./home.css"
 
 const Home = () => {
@@ -22,6 +23,7 @@ const Home = () => {
       <Rates />
       <Info />
       <HomeProgramCard />
+      <Footer />
     </div>
   )
 }
