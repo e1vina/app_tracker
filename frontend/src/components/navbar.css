@@ -1,0 +1,229 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+
+:root {
+  --navbar-height: 72px;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: var(--navbar-height);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 24px;
+  background: #ffffff;
+  border-bottom: 1px solid #e8e8f0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5rem;
+  color: #000;
+  font-family: "Anton", sans-serif;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.navbar-logo-image {
+  height: 48px;
+  width: 48px;
+}
+
+.navbar-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 48px;
+  height: 48px;
+  padding: 10px;
+  border: none;
+  border-radius: 12px;
+  background: transparent;
+  cursor: pointer;
+  z-index: 202;
+  transition: background 0.2s ease;
+}
+
+.navbar-toggle:hover {
+  background: #f0f0f8;
+}
+
+.navbar-toggle span {
+  display: block;
+  width: 24px;
+  height: 2.5px;
+  background: #161312;
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.navbar-toggle.is-open span:nth-child(1) {
+  transform: translateY(7.5px) rotate(45deg);
+}
+
+.navbar-toggle.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar-toggle.is-open span:nth-child(3) {
+  transform: translateY(-7.5px) rotate(-45deg);
+}
+
+.navbar-overlay {
+  display: none;
+}
+
+.navbar-menu {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-list {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-link {
+  color: #161312;
+  text-decoration: none;
+  font-size: 1.05rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.navbar-link.log {
+  background-color: #eeedfe;
+  padding: 10px 22px;
+  border: 1px solid #afa9ec;
+}
+
+.navbar-link.sign {
+  background: #534ab7;
+  color: #ffffff;
+  padding: 10px 20px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --navbar-height: 68px;
+  }
+
+  .navbar--compact .navbar-toggle,
+  .navbar--compact .navbar-overlay {
+    display: none;
+  }
+
+  .navbar--compact .navbar-menu {
+    position: static;
+    max-height: none;
+    opacity: 1;
+    visibility: visible;
+    overflow: visible;
+    box-shadow: none;
+    border: none;
+  }
+
+  .navbar--compact .navbar-list {
+    flex-direction: row;
+    padding: 0;
+    gap: 12px;
+  }
+
+  .navbar--compact .navbar-list li {
+    border: none;
+  }
+
+  .navbar--compact .navbar-link {
+    padding: 10px 16px;
+  }
+
+  .navbar--compact .navbar-link.sign {
+    margin: 0;
+  }
+
+  .navbar {
+    padding: 10px 16px;
+  }
+
+  .navbar-toggle {
+    display: flex;
+  }
+
+  .navbar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    top: var(--navbar-height);
+    border: none;
+    background: rgba(13, 13, 13, 0.35);
+    cursor: pointer;
+    z-index: 200;
+  }
+
+  .navbar-menu {
+    position: fixed;
+    top: var(--navbar-height);
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border-bottom: 1px solid #e8e8f0;
+    box-shadow: 0 12px 24px rgba(83, 74, 183, 0.12);
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: max-height 0.3s ease, opacity 0.25s ease, visibility 0.25s;
+    z-index: 201;
+  }
+
+  .navbar-menu.is-open {
+    max-height: 560px;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .navbar-list {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding: 24px 32px 32px 56px;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .navbar-list li {
+    width: 100%;
+    border-bottom: 1px solid #f0f0f5;
+    text-align: center;
+  }
+
+  .navbar-link {
+    display: block;
+    padding: 18px 28px;
+    font-size: 1.15rem;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .navbar-link.log,
+  .navbar-link.sign {
+    margin: 14px auto;
+    width: fit-content;
+    min-width: 160px;
+    text-align: center;
+  }
+}

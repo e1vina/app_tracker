@@ -1,21 +1,7 @@
-import "./log.css";
-import image from "../assets/logo_light.svg";
-import { Link, useNavigate} from "react-router-dom";
-import { useState } from "react";
-
-const buttonStyles = {
-  color: "#161312",
-  fontSize: "16px",
-  padding: "10px 100px",
-  borderRadius: "3px",
-  cursor: "pointer",
-  border: "1px solid #161312",
-  backgroundColor: "#534AB7",
-  fontWeight: "400",
-  marginRight: "190px",
-  fontFamily: "Nunito, sans-serif",
-  marginTop: "25px",
-};
+import "./log.css"
+import image from "../assets/logo_light.svg"
+import { Link, useNavigate } from "react-router-dom"
+import { useState } from "react"
 
 const Log = () => {
   const navigate = useNavigate()
@@ -23,18 +9,17 @@ const Log = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-  });
+  })
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData); // test: prints what user typed
-
+    e.preventDefault()
+    console.log(formData)
     navigate("/dashboard")
-  };
+  }
 
   return (
     <div className="container-section">
@@ -44,9 +29,7 @@ const Log = () => {
           EXTrack
         </div>
 
-        <h2 style={{marginBottom: "10px" }}>
-          Welcome back, 
-        </h2>
+        <h2>Welcome back,</h2>
         <h2>Your applications are waiting!</h2>
         <p className="pick">
           Pick up right where you left off — deadlines, documents, and decisions
@@ -58,52 +41,49 @@ const Log = () => {
       </div>
 
       <div className="value-text">
-        <h3> Sign In</h3>
-        <p className="no-account">
-          {" "}
-          Don't have an account?{" "}
-          <Link to="/signup" className="">
-            {" "}
-            Create One Free
-          </Link>{" "}
-        </p>
+        <div className="auth-panel">
+          <h3>Sign In</h3>
+          <p className="no-account">
+            Don&apos;t have an account?{" "}
+            <Link to="/signup">Create One Free</Link>
+          </p>
 
-        <form onSubmit={handleSubmit}>
-          <input
-            className="input"
-            type="email"
-            name="email"
-            placeholder="Email address"
-            value={formData.email}
-            onChange={handleChange}
-          />
-          <br />
-          <input
-            className="input"
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-          />
-          <br />
-          <button type="submit"  className="signin-btn" style={buttonStyles}>
-            Log in
-          </button>
-        </form>
-        <p className="no-account" style={{marginTop: '15px'}}>
-          By signing in, you agree to our{" "}
-          <a href="" className="signin-link">
-            Terms of Service
-          </a>{" "}
-          and{" "}
-          <a href="" className="signin-link">
-            Privacy Policy
-          </a>
-          .
-        </p>
+          <form onSubmit={handleSubmit}>
+            <input
+              className="input"
+              type="email"
+              name="email"
+              placeholder="Email address"
+              value={formData.email}
+              onChange={handleChange}
+            />
+            <input
+              className="input"
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+            <button type="submit" className="signin-btn">
+              Log in
+            </button>
+          </form>
+
+          <p className="terms-note">
+            By signing in, you agree to our{" "}
+            <a href="" className="signin-link">
+              Terms of Service
+            </a>{" "}
+            and{" "}
+            <a href="" className="signin-link">
+              Privacy Policy
+            </a>
+            .
+          </p>
+        </div>
       </div>
     </div>
-  );
-};
-export default Log;
+  )
+}
+export default Log

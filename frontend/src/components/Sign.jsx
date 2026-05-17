@@ -1,25 +1,11 @@
-import "./sign.css";
-import './log.css'
-import image from "../assets/logo_light.svg";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-
-const buttonStyles = {
-  color: "#161312",
-  fontSize: "16px",
-  padding: "10px 100px",
-  borderRadius: "3px",
-  cursor: "pointer",
-  border: "1px solid #161312",
-  backgroundColor: "#534AB7",
-  fontWeight: "400",
-  marginRight: "190px",
-  fontFamily: "Nunito, sans-serif",
-  marginTop: "25px",
-};
+import "./sign.css"
+import "./log.css"
+import image from "../assets/logo_light.svg"
+import { Link, useNavigate } from "react-router-dom"
+import { useState } from "react"
 
 const Sign = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -29,32 +15,32 @@ const Sign = () => {
     password: "",
     confirmPassword: "",
     agreed: false,
-  });
+  })
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value, type, checked } = e.target
     setFormData({
       ...formData,
       [name]: type === "checkbox" ? checked : value,
-    });
-  };
+    })
+  }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match");
-      return;
+      alert("Passwords do not match")
+      return
     }
 
     if (!formData.agreed) {
-      alert("Please agree to the Terms of Service");
-      return;
+      alert("Please agree to the Terms of Service")
+      return
     }
 
-    console.log(formData);
-    navigate("/login");
-  };
+    console.log(formData)
+    navigate("/login")
+  }
 
   return (
     <div className="container-section">
@@ -64,7 +50,7 @@ const Sign = () => {
           EXTrack
         </div>
 
-        <h2 style={{ marginBottom: "10px" }}>Start tracking</h2>
+        <h2>Start tracking</h2>
         <h2>your study abroad journey today!</h2>
         <p className="pick">
           Set up takes under 2 minutes. Add your first application right after —
@@ -77,111 +63,102 @@ const Sign = () => {
       </div>
 
       <div className="value-text">
-        <h3> Create Your Account</h3>
-        <p className="no-account">
-          {" "}
-          Already have one?{" "}
-          <Link to="/login" className="">
-            {" "}
-            Log In
-          </Link>{" "}
-        </p>
+        <div className="auth-panel">
+          <h3>Create Your Account</h3>
+          <p className="no-account">
+            Already have one? <Link to="/login">Log In</Link>
+          </p>
 
-        <form onSubmit={handleSubmit} className="signup-form">
-          <div className="form-row">
+          <form onSubmit={handleSubmit} className="signup-form">
+            <div className="form-row">
+              <div className="form-group">
+                <input
+                  type="text"
+                  name="firstName"
+                  placeholder="First Name"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="text"
+                  name="lastName"
+                  placeholder="Last Name"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
             <div className="form-group">
-              {/* <label>First name</label> */}
+              <input
+                type="email"
+                name="email"
+                placeholder="Email address"
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-group">
               <input
                 type="text"
-                name="firstName"
-                placeholder="First Name"
-                value={formData.firstName}
+                name="homeUniversity"
+                placeholder="Home university"
+                value={formData.homeUniversity}
                 onChange={handleChange}
               />
             </div>
-            <div className="form-group">
-              {/* <label>Last name</label> */}
+
+            <div className="form-row">
+              <div className="form-group">
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  placeholder="Confirm password"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
+            <div className="form-check">
               <input
-                type="text"
-                name="lastName"
-                placeholder="Last Name"
-                value={formData.lastName}
+                type="checkbox"
+                name="agreed"
+                id="agreed"
+                checked={formData.agreed}
                 onChange={handleChange}
               />
+              <label htmlFor="agreed">
+                I agree to the{" "}
+                <a href="" className="signup-link">
+                  Terms of Service
+                </a>{" "}
+                and{" "}
+                <a href="" className="signup-link">
+                  Privacy Policy
+                </a>
+              </label>
             </div>
-          </div>
 
-          <div className="form-group">
-            {/* <label>Email address</label> */}
-            <input
-              type="email"
-              name="email"
-              placeholder="Email address"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </div>
-
-          <div className="form-group">
-            {/* <label>Home university</label> */}
-            <input
-              type="text"
-              name="homeUniversity"
-              placeholder="Home university"
-              value={formData.homeUniversity}
-              onChange={handleChange}
-            />
-          </div>
-
-          <div className="form-row">
-            <div className="form-group">
-              {/* <label>Password</label> */}
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-group">
-              {/* <label>Confirm password</label> */}
-              <input
-                type="password"
-                name="confirmPassword"
-                placeholder="Confirm password"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-
-          <div className="form-check">
-            <input
-              type="checkbox"
-              name="agreed"
-              id="agreed"
-              checked={formData.agreed}
-              onChange={handleChange}
-            />
-            <label htmlFor="agreed">
-              I agree to the{" "}
-              <a href="" className="signup-link">
-                Terms of Service
-              </a>{" "}
-              and{" "}
-              <a href="" className="signup-link">
-                Privacy Policy
-              </a>
-            </label>
-          </div>
-
-          <button type="submit" className="signup-btn" style={buttonStyles}>
-            Create account
-          </button>
-        </form>
+            <button type="submit" className="signup-btn">
+              Create account
+            </button>
+          </form>
+        </div>
       </div>
     </div>
-  );
-};
-export default Sign;
+  )
+}
+export default Sign
