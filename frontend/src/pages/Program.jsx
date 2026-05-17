@@ -1,9 +1,7 @@
-
-
 const Program = () => {
   return (
-    <div>
-        <h1>Program Page</h1>
+    <div className="page-content">
+      <h1>Program Page</h1>
     </div>
   )
 }

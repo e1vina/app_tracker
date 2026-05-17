@@ -1,19 +1,23 @@
+import { useEffect } from "react"
 import Top from "../components/Top"
 import Image from "../assets/top.png"
-import Rates from "../components/Rates";
-import Info from "../components/Info";
-
-const imageStyle = {
-  display: "block",
-  margin: "0 auto",
-  // placeItems: 'center',
-};
+import Rates from "../components/Rates"
+import Info from "../components/Info"
+import "./home.css"
 
 const Home = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }, [])
+
   return (
-    <div>
-      <Top />
-       <img src={Image} alt="" height={576} width={1024} style={imageStyle} />
+    <div className="home-page">
+      <section className="home-hero">
+        <Top />
+        <div className="home-hero-image">
+          <img src={Image} alt="Study abroad application dashboard preview" />
+        </div>
+      </section>
       <Rates />
       <Info />
     </div>
