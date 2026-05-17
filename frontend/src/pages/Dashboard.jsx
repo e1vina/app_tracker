@@ -67,7 +67,7 @@ const Dashboard = () => {
           <div className="panel-title">Upcoming deadlines</div>
           {deadlines.map((d, i) => (
             <div className="deadline-row" key={i}>
-              <div className="deadline-days" style={{ color: d.color }}>{d.days}</div>
+              <div className="deadline-days" style={{ color: d.color, background: d.color + '18' }}>{d.days}</div>
               <div>
                 <div className="deadline-name">{d.name}</div>
                 <div className="deadline-date">{d.date}</div>
