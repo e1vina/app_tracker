@@ -1,0 +1,114 @@
+.profile-page {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: "Arial", sans-serif;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: #ffffff;
+  border: 0.5px solid #E8E8F0;
+  border-radius: 10px;
+}
+
+.profile-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #EEEDFE;
+  color: #3C3489;
+  font-size: 18px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-name {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 3px;
+}
+
+.profile-sub {
+  font-size: 13px;
+  color: #555560;
+}
+
+.profile-form {
+  background: #ffffff;
+  border: 0.5px solid #E8E8F0;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.form-section-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: #555560;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+  margin-top: 20px;
+}
+
+.form-section-title:first-child {
+  margin-top: 0;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  font-size: 13px;
+  color: #555560;
+}
+
+.form-group input,
+.form-group select {
+  padding: 9px 11px;
+  font-size: 13px;
+  border: 0.5px solid #E8E8F0;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #0D0D0D;
+  font-family: "Arial", sans-serif;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #534AB7;
+}
+
+.save-btn {
+  margin-top: 20px;
+  padding: 10px 24px;
+  background: #534AB7;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: "Arial", sans-serif;
+}
+
+.save-btn:hover {
+  background: #3C3489;
+}

@@ -2,23 +2,30 @@ import './dashNavigation.css'
 import image from '../assets/logo.svg'
 import { Link } from 'react-router-dom'
 
-const navigationStyles= {
+const user = {
+  firstName: "Adaeze",
+  lastName: "Okonkwo",
+}
+
+const initials = user.firstName[0] + user.lastName[0]
+
+const navigationStyles = {
   width: 'auto',
   margin: '10px 2px',
-//   background: '#333',
   display: 'flex',
-  justifyContent:'space-between',
-  // padding: '10px',
-  fontFamily: ['Arial','Helvetica', 'sans-serif',],
+  alignItems: 'center',
+  fontFamily: ['Arial', 'Helvetica', 'sans-serif'],
   color: 'black',
-}  
-const listStyles={
+}
+
+const listStyles = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
   gap: '40px',
   listStyle: 'none',
   fontSize: '16px',
+  marginLeft: 'auto', // ← pushes everything to the right
 }
 
 const DashNavigation = () => {
@@ -33,7 +40,11 @@ const DashNavigation = () => {
             <li><Link to="/universities" className='ref'>Universities</Link></li>
             <li><Link to="/profile" className='ref'>Profile</Link></li>
         </ul>
+
+        <Link to="/profile" className='dash-avatar'>
+        {initials}
+      </Link>
     </div>
     )
 }
-export default DashNavigation
+export default DashNavigation  
