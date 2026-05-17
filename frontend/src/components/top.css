@@ -15,6 +15,8 @@
 .all {
   text-align: center;
   line-height: 1.12;
+  font-size: 2.5rem;
+  /* padding: 10px; */
 }
 
 .all {
@@ -35,7 +37,7 @@
 }
 
 .hero_tag {
-  padding: 12px 32px;
+  padding: 12px 40px;
   font-size: 1rem;
   font-weight: 600;
   border: 1px solid #afa9ec;

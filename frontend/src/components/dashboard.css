@@ -141,3 +141,30 @@
   font-size: 11px;
   color: #555560;
 }
+
+@media (max-width:686px){
+  .stat-number{
+    font-size: 20px;
+  }
+}
+
+/* @media (max-width:645px){
+  .stat-number{
+    font-size: 15px;
+  }
+} */
+
+@media (max-width: 495px) {
+  .stat-card{
+    padding: 12px;
+  }
+  .panels {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width:434px){
+  .stat-row{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

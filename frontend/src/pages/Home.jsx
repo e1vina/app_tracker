@@ -15,7 +15,7 @@ const Home = () => {
       <section className="home-hero">
         <Top />
         <div className="home-hero-image">
-          <img src={Image} alt="Study abroad application dashboard preview" />
+          <img src={Image} height={576} width={1024} alt="Study abroad application dashboard preview" />
         </div>
       </section>
       <Rates />
