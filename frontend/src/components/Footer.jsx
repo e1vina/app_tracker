@@ -22,7 +22,7 @@ const Footer = () => {
          <ul className='qlist'>
             <li><Link to="/" className='ref'>Home</Link></li>
             <li><Link to="/about" className='ref'>About</Link></li>
-            <li><Link to="/program" className='ref'>programs</Link></li>
+            <li><Link to="/faq" className='ref'>FAQ</Link></li>
         </ul>
       </div>
 
@@ -37,7 +37,7 @@ const Footer = () => {
 
       <div className="tile">
         <h3>Contact Us</h3>
-        <p>Email: hello@globalexchange.edu</p>
+        <p>Email: hello@extrack.edu</p>
         <p>Phone: +234 803 123 4567</p>
         <p>Address: 123 University Ave, Abuja, Nigeria</p>
       </div>

@@ -1,6 +1,6 @@
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.jsx";
-import Program from "./pages/Program.jsx";
+import Faq from "./pages/Faq.jsx";
 import LogIn from "./pages/LogIn.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import Application from "./pages/Application.jsx";
@@ -17,7 +17,7 @@ const App = () => {
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
-            <Route path="/program" element={<Program />} />
+            <Route path="/faq" element={<Faq />} />
           </Route>
 
           <Route element={<DashLayout />}>

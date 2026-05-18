@@ -42,7 +42,7 @@ const HomeProgramCard = () => {
           <h2>Popular Destinations</h2>
           <ul className="view-all">
             <li>
-              <Link to="/program" className="ref">
+              <Link to="/signup" className="ref">
                 View all programs  →
               </Link>
             </li>

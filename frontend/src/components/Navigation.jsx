@@ -14,7 +14,7 @@ const navLinks = [
       document.getElementById("info")?.scrollIntoView({ behavior: "smooth" })
     },
   },
-  { to: "/program", label: "Programs" },
+  { to: "/faq", label: "FAQ" },
   { to: "/login", label: "Log in", className: "log" },
   { to: "/signup", label: "Sign up", className: "sign" },
 ]
