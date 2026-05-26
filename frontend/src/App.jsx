@@ -9,6 +9,8 @@ import Profile from "./pages/Profile.jsx";
 import Layout from "./Layout.jsx";
 import DashLayout from "./DashLayout.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
+import AddApplication from "./pages/AddApplication.jsx";
+import EditApplication from "./pages/EditApplication.jsx";
 
 const App = () => {
   return (
@@ -25,6 +27,8 @@ const App = () => {
             <Route path="/universities" element={<Universities />} />
             <Route path="/application" element={<Application />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/application/new" element={<AddApplication />} />
+            <Route path="/application/edit" element={<EditApplication />} />
           </Route>
 
           <Route path="/login" element={<LogIn />} />

@@ -1,0 +1,262 @@
+:root {
+  --primary-purple: #5b4fe8;
+  --bg-main: #f5f6f9;
+  --bg-card: #ffffff;
+  --bg-input: #f8f9fc;
+  --border-light: #e5e7eb;
+  --border-card: #d1d5db;
+  --text-main: #1f2937;
+  --text-label: #6b7280;
+  --text-blue: #4b44b5;
+}
+
+/* ── Wrapper ── */
+.application-wrapper {
+  background-color: var(--bg-main);
+  min-height: 100vh;
+  padding: 40px 20px 60px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text-main);
+  box-sizing: border-box;
+}
+
+.application-page {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* ── Header ── */
+.application-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.application-header h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-blue);
+  margin: 0;
+}
+
+.application-header p {
+  font-size: 13px;
+  color: var(--text-label);
+  margin: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+/* ── Empty state ── */
+.empty-applications {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  padding: 60px 32px;
+  text-align: center;
+}
+
+.empty-applications h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-main);
+  margin: 0 0 8px;
+}
+
+.empty-applications p {
+  font-size: 14px;
+  color: var(--text-label);
+  margin: 0 0 24px;
+}
+
+.empty-applications button {
+  background-color: var(--primary-purple);
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.empty-applications button:hover {
+  opacity: 0.88;
+}
+
+/* ── Grid ── */
+.applications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* ── Card ── */
+.application-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.application-card:hover {
+  box-shadow: 0 4px 20px rgba(91, 79, 232, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ── Top row: name + status ── */
+.application-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.application-top h2 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 4px;
+}
+
+.application-top > div:first-child p {
+  font-size: 13px;
+  color: var(--text-label);
+  margin: 0;
+}
+
+.status-badge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background-color: var(--bg-input);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Detail rows ── */
+.application-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid var(--border-light);
+  padding-top: 16px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+.detail-row span:first-child {
+  color: var(--text-label);
+  font-weight: 500;
+}
+
+.detail-row span:last-child {
+  color: var(--text-main);
+  font-weight: 600;
+  text-align: right;
+  max-width: 55%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Progress ── */
+.progress-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-label);
+}
+
+.progress-bar {
+  height: 6px;
+  background-color: var(--bg-input);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-purple), #818cf8);
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+/* ── Actions ── */
+.card-actions {
+  display: flex;
+  gap: 10px;
+  border-top: 1px solid var(--border-light);
+  padding-top: 16px;
+}
+
+.edit-btn {
+  flex: 1;
+  padding: 9px 0;
+  background: var(--bg-input);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-blue);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.edit-btn:hover {
+  background: #ede9ff;
+  border-color: var(--primary-purple);
+}
+
+.delete-btn {
+  flex: 1;
+  padding: 9px 0;
+  background: var(--bg-input);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #b91c1c;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.delete-btn:hover {
+  background: #fff1f1;
+  border-color: #fca5a5;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .applications-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .application-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

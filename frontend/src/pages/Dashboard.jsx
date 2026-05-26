@@ -1,41 +1,83 @@
-
+import { useEffect, useState } from "react"
 import "../components/dashboard.css"
 
 const Dashboard = () => {
+  const [applications, setApplications] = useState([])
+
+  useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem("applications")) || []
+    setApplications(saved)
+  }, [])
+
+  // --- STATS ---
+  const total = applications.length
+  const accepted = applications.filter(a => a.status === "Accepted").length
+  const inProgress = applications.filter(a => a.status === "Applied" || a.status === "Planned").length
+
+  const today = new Date()
+
+  const upcomingSorted = applications
+    .filter(a => a.deadline)
+    .map(a => ({ ...a, _date: new Date(a.deadline) }))
+    .filter(a => a._date >= today)
+    .sort((a, b) => a._date - b._date)
+
+  const nextDays = upcomingSorted.length > 0
+    ? Math.ceil((upcomingSorted[0]._date - today) / (1000 * 60 * 60 * 24))
+    : null
+
   const stats = [
-    { number: 6, label: "Applications", color: "#0D0D0D" },
-    { number: 2, label: "Accepted", color: "#27500A" },
-    { number: 3, label: "In progress", color: "#0C447C" },
-    { number: "12d", label: "Next deadline", color: "#A32D2D" },
+    { number: total,                                    label: "Applications",  color: "#0D0D0D"  },
+    { number: accepted,                                 label: "Accepted",      color: "#27500A"  },
+    { number: inProgress,                               label: "In progress",   color: "#0C447C"  },
+    { number: nextDays !== null ? `${nextDays}d` : "—", label: "Next deadline", color: "#A32D2D"  },
   ]
 
-  const applications = [
-    { flag: "🇧🇪", name: "KU Leuven", program: "Mechanical Eng.", status: "Accepted", badge: "green" },
-    { flag: "🇸🇪", name: "Uppsala University", program: "Computer Science", status: "Applied", badge: "blue" },
-    { flag: "🇳🇱", name: "VU Amsterdam", program: "Data Science", status: "Planned", badge: "amber" },
-    { flag: "🇩🇪", name: "TU Delft", program: "Electrical Eng.", status: "Accepted", badge: "green" },
-    { flag: "🇫🇷", name: "Sciences Po", program: "Political Science", status: "Rejected", badge: "red" },
-  ]
-
-  const deadlines = [
-    { days: "12d", name: "Uppsala University", date: "June 1", color: "#A32D2D" },
-    { days: "28d", name: "VU Amsterdam", date: "June 17", color: "#633806" },
-    { days: "45d", name: "Politecnico di Milano", date: "July 4", color: "#27500A" },
-  ]
-
+  // --- BADGE ---
   const badgeClass = {
-    green: "badge-green",
-    blue: "badge-blue",
-    amber: "badge-amber",
-    red: "badge-red",
+    Accepted:   "badge-green",
+    Applied:    "badge-blue",
+    Planned:    "badge-amber",
+    Waitlisted: "badge-amber",
+    Rejected:   "badge-red",
   }
+
+  // --- FLAG MAP ---
+  const flagMap = {
+    Belgium: "🇧🇪", Sweden: "🇸🇪", Netherlands: "🇳🇱",
+    Germany: "🇩🇪", France: "🇫🇷", Italy: "🇮🇹",
+    Spain: "🇪🇸", Portugal: "🇵🇹", Denmark: "🇩🇰",
+    Norway: "🇳🇴", Finland: "🇫🇮", Austria: "🇦🇹",
+    Switzerland: "🇨🇭", Poland: "🇵🇱", Canada: "🇨🇦",
+    USA: "🇺🇸", Japan: "🇯🇵", Australia: "🇦🇺",
+    "South Korea": "🇰🇷", Brazil: "🇧🇷",
+    "Czech Republic": "🇨🇿",
+  }
+
+  // Recent: last 5 added, newest first
+  const recentApps = [...applications].reverse().slice(0, 5)
+
+  // Upcoming: next 3 deadlines
+  const upcomingDeadlines = upcomingSorted.slice(0, 3)
+  const deadlineColors = ["#A32D2D", "#633806", "#27500A"]
+
+  const formatDate = (dateStr) =>
+    new Date(dateStr).toLocaleDateString("en-US", { month: "long", day: "numeric" })
+
+  // Greeting
+  const hour = new Date().getHours()
+  const greeting = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening"
 
   return (
     <div className="dashboard">
 
       <div className="greeting">
-        <h2>Good morning, Adaeze 👋</h2>
-        <p>You have 1 deadline coming up in 12 days.</p>
+        <h2>{greeting}, Adaeze 👋</h2>
+        <p>
+          {nextDays !== null
+            ? `You have a deadline coming up in ${nextDays} days.`
+            : "No upcoming deadlines."}
+        </p>
       </div>
 
       <div className="stat-row">
@@ -51,29 +93,52 @@ const Dashboard = () => {
 
         <div className="panel">
           <div className="panel-title">Recent applications</div>
-          {applications.map((a, i) => (
-            <div className="app-row" key={i}>
-              <div className="app-flag">{a.flag}</div>
-              <div className="app-info">
-                <div className="app-name">{a.name}</div>
-                <div className="app-prog">{a.program}</div>
+
+          {recentApps.length === 0 ? (
+            <p style={{ color: "#999", fontSize: "0.9rem" }}>No applications yet.</p>
+          ) : (
+            recentApps.map((a) => (
+              <div className="app-row" key={a.id}>
+                <div className="app-flag">
+                  {a.flag || flagMap[a.country] || "🏳️"}
+                </div>
+                <div className="app-info">
+                  <div className="app-name">{a.universityName}</div>
+                  <div className="app-prog">{a.program}</div>
+                </div>
+                <span className={`badge ${badgeClass[a.status] || "badge-amber"}`}>
+                  {a.status}
+                </span>
               </div>
-              <span className={`badge ${badgeClass[a.badge]}`}>{a.status}</span>
-            </div>
-          ))}
+            ))
+          )}
         </div>
 
         <div className="panel">
           <div className="panel-title">Upcoming deadlines</div>
-          {deadlines.map((d, i) => (
-            <div className="deadline-row" key={i}>
-              <div className="deadline-days" style={{ color: d.color, background: d.color + '18' }}>{d.days}</div>
-              <div>
-                <div className="deadline-name">{d.name}</div>
-                <div className="deadline-date">{d.date}</div>
-              </div>
-            </div>
-          ))}
+
+          {upcomingDeadlines.length === 0 ? (
+            <p style={{ color: "#999", fontSize: "0.9rem" }}>No upcoming deadlines.</p>
+          ) : (
+            upcomingDeadlines.map((d, i) => {
+              const daysLeft = Math.ceil((d._date - today) / (1000 * 60 * 60 * 24))
+              const color = deadlineColors[i]
+              return (
+                <div className="deadline-row" key={d.id}>
+                  <div
+                    className="deadline-days"
+                    style={{ color, background: color + "18" }}
+                  >
+                    {daysLeft}d
+                  </div>
+                  <div>
+                    <div className="deadline-name">{d.universityName}</div>
+                    <div className="deadline-date">{formatDate(d.deadline)}</div>
+                  </div>
+                </div>
+              )
+            })
+          )}
         </div>
 
       </div>
