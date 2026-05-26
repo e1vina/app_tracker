@@ -9,7 +9,10 @@ const Dashboard = () => {
     setApplications(saved)
   }, [])
 
-  // --- STATS ---
+  const stored = JSON.parse(localStorage.getItem("user"))
+  const firstName = stored?.firstName || "there"
+
+  // stats
   const total = applications.length
   const accepted = applications.filter(a => a.status === "Accepted").length
   const inProgress = applications.filter(a => a.status === "Applied" || a.status === "Planned").length
@@ -33,7 +36,7 @@ const Dashboard = () => {
     { number: nextDays !== null ? `${nextDays}d` : "—", label: "Next deadline", color: "#A32D2D"  },
   ]
 
-  // --- BADGE ---
+  // badges
   const badgeClass = {
     Accepted:   "badge-green",
     Applied:    "badge-blue",
@@ -42,7 +45,7 @@ const Dashboard = () => {
     Rejected:   "badge-red",
   }
 
-  // --- FLAG MAP ---
+  //flags
   const flagMap = {
     Belgium: "🇧🇪", Sweden: "🇸🇪", Netherlands: "🇳🇱",
     Germany: "🇩🇪", France: "🇫🇷", Italy: "🇮🇹",
@@ -72,7 +75,7 @@ const Dashboard = () => {
     <div className="dashboard">
 
       <div className="greeting">
-        <h2>{greeting}, Adaeze 👋</h2>
+        <h2>{greeting}, {firstName} 👋</h2>
         <p>
           {nextDays !== null
             ? `You have a deadline coming up in ${nextDays} days.`
