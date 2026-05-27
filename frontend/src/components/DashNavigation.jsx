@@ -1,21 +1,40 @@
+import { useState, useEffect } from "react"
 import Navbar from "./Navbar"
 
-const user = {
-  firstName: "Adaeze",
-  lastName: "Okonkwo",
-}
-
-const initials = user.firstName[0] + user.lastName[0]
-
-const navLinks = [
-  { to: "/dashboard", label: "Dashboard" },
-  { to: "/application", label: "Applications" },
-  { to: "/universities", label: "Universities" },
-  { to: "/profile", label: "Profile" },
-  { to: "/profile", label: initials, className: "dash-avatar" },
-]
-
 const DashNavigation = () => {
+  const [initials, setInitials] = useState("")
+
+  useEffect(() => {
+    const fetchUserInitials = async () => {
+      try {
+        const token = localStorage.getItem("token")
+        if (!token) return
+
+        const res = await fetch("/api/auth/profile", {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+
+        if (res.ok) {
+          const userData = await res.json()
+          const userInitials =
+            (userData.firstName?.[0] || "") + (userData.lastName?.[0] || "")
+          setInitials(userInitials)
+        }
+      } catch (error) {
+        console.error("Error fetching user initials:", error)
+      }
+    }
+
+    fetchUserInitials()
+  }, [])
+
+  const navLinks = [
+    { to: "/dashboard", label: "Dashboard" },
+    { to: "/application", label: "Applications" },
+    { to: "/universities", label: "Universities" },
+    { to: "/profile", label: initials, className: "dash-avatar" },
+  ]
+
   return <Navbar links={navLinks} />
 }
 

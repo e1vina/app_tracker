@@ -17,8 +17,29 @@ const Log = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    navigate("/dashboard");
+    (async () => {
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: formData.email, password: formData.password })
+        })
+        const data = await res.json()
+        if (res.ok) {
+          // store token and userId
+          if (data.token) {
+            localStorage.setItem('token', data.token)
+            localStorage.setItem('userId', data.userId)
+          }
+          navigate('/dashboard')
+        } else {
+          alert(data.message || 'Login failed')
+        }
+      } catch (err) {
+        console.error(err)
+        alert('Network error')
+      }
+    })()
   };
 
   return (

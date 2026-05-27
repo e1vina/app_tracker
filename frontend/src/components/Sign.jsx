@@ -38,8 +38,33 @@ const Sign = () => {
       return
     }
 
-    console.log(formData)
-    navigate("/login")
+    // Send registration request to backend
+    (async () => {
+      try {
+        const res = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: formData.email,
+            email: formData.email,
+            password: formData.password,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            homeUniversity: formData.homeUniversity,
+          })
+        })
+        if (res.ok) {
+          alert('Registration successful — please log in')
+          navigate('/login')
+        } else {
+          const data = await res.json()
+          alert(data.message || 'Registration failed')
+        }
+      } catch (err) {
+        console.error(err)
+        alert('Network error')
+      }
+    })()
   }
 
   return (

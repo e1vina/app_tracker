@@ -1,36 +1,127 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../components/profile.css";
 
 const Profile = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [originalFormData, setOriginalFormData] = useState({});
 
   const [formData, setFormData] = useState({
-    firstName: "Adaeze",
-    lastName: "Okonkwo",
-    email: "adaeze@unilag.edu.ng",
-    homeUniversity: "University of Lagos",
-    gpa: "3.8",
-    studyYear: "Year 3",
+    firstName: "",
+    lastName: "",
+    email: "",
+    homeUniversity: "",
+    gpa: "",
+    studyYear: "Year 1",
     targetSemester: "Spring 2026",
-    languages: "English, French",
+    languages: "",
   });
+
+  // Fetch user profile on mount
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          navigate('/login');
+          return;
+        }
+
+        const res = await fetch('/api/auth/profile', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        if (!res.ok) {
+          throw new Error('Failed to fetch profile');
+        }
+
+        const userData = await res.json();
+        const newFormData = {
+          firstName: userData.firstName || '',
+          lastName: userData.lastName || '',
+          email: userData.email || '',
+          homeUniversity: userData.homeUniversity || '',
+          gpa: userData.gpa || '',
+          studyYear: userData.studyYear || 'Year 1',
+          targetSemester: userData.targetSemester || 'Spring 2026',
+          languages: userData.languages || '',
+        };
+        setFormData(newFormData);
+        setOriginalFormData(newFormData);
+      } catch (error) {
+        console.error('Error fetching profile:', error);
+        alert('Failed to load profile');
+        navigate('/login');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserProfile();
+  }, [navigate]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleCancelEdit = () => {
+    setFormData(originalFormData);
+    setIsEditing(false);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    localStorage.setItem("user", JSON.stringify(formData));
-    alert("Profile saved!");
+    setIsSaving(true);
+
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('No token found');
+        navigate('/login');
+        return;
+      }
+
+      const res = await fetch('/api/auth/profile', {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to update profile');
+      }
+
+      const result = await res.json();
+      setOriginalFormData(formData);
+      setIsEditing(false);
+      alert('Profile updated successfully!');
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      alert('Failed to update profile');
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    localStorage.removeItem("userId");
     navigate("/");
   };
+
+  if (loading) {
+    return <div className="profile-container"><p>Loading profile...</p></div>;
+  }
 
   return (
     <div className="profile-container">
@@ -60,6 +151,7 @@ const Profile = () => {
                 name="firstName"
                 value={formData.firstName}
                 onChange={handleChange}
+                disabled={!isEditing}
               />
             </div>
             <div className="form-group">
@@ -69,6 +161,7 @@ const Profile = () => {
                 name="lastName"
                 value={formData.lastName}
                 onChange={handleChange}
+                disabled={!isEditing}
               />
             </div>
             <div className="form-group">
@@ -77,7 +170,7 @@ const Profile = () => {
                 type="email"
                 name="email"
                 value={formData.email}
-                onChange={handleChange}
+                disabled
               />
             </div>
             <div className="form-group">
@@ -87,6 +180,7 @@ const Profile = () => {
                 name="languages"
                 value={formData.languages}
                 onChange={handleChange}
+                disabled={!isEditing}
               />
             </div>
           </div>
@@ -100,6 +194,7 @@ const Profile = () => {
                 name="homeUniversity"
                 value={formData.homeUniversity}
                 onChange={handleChange}
+                disabled={!isEditing}
               />
             </div>
             <div className="form-group">
@@ -109,6 +204,7 @@ const Profile = () => {
                 name="gpa"
                 value={formData.gpa}
                 onChange={handleChange}
+                disabled={!isEditing}
               />
             </div>
             <div className="form-group">
@@ -117,6 +213,7 @@ const Profile = () => {
                 name="studyYear"
                 value={formData.studyYear}
                 onChange={handleChange}
+                disabled={!isEditing}
               >
                 <option>Year 1</option>
                 <option>Year 2</option>
@@ -131,6 +228,7 @@ const Profile = () => {
                 name="targetSemester"
                 value={formData.targetSemester}
                 onChange={handleChange}
+                disabled={!isEditing}
               >
                 <option>Autumn 2025</option>
                 <option>Spring 2026</option>
@@ -140,14 +238,63 @@ const Profile = () => {
             </div>
           </div>
 
-          <button type="submit" className="save-btn">
-            Save changes
-          </button>
+          {isEditing && (
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <button type="submit" className="save-btn" disabled={isSaving}>
+                {isSaving ? 'Saving...' : 'Save changes'}
+              </button>
+              <button
+                type="button"
+                className="cancel-btn"
+                onClick={handleCancelEdit}
+                disabled={isSaving}
+              >
+                Cancel
+              </button>
+            </div>
+          )}
         </form>
 
-        <button onClick={handleLogout} className="logout-btn">
-          Log out
-        </button>
+        <div style={{
+          display: 'flex',
+          flexDirection: 'row',     // Explicitly forces them side-by-side
+          justifyContent: 'center', // Centers them horizontally
+          alignItems: 'stretch',    // Forces both buttons to be the exact same height
+          gap: '15px',
+          marginTop: '3rem',
+          width: '100%',
+          maxWidth: '400px',
+          marginLeft: 'auto',
+          marginRight: 'auto'
+        }}>
+          {!isEditing && (
+            <button
+              type="button"
+              className="edit-btn"
+              onClick={handleEditClick}
+              style={{
+                flex: 1,
+                margin: 0,          // Strips out any rogue external margins pulling it up/down
+                padding: '12px 0',  // Fixed vertical padding, zero horizontal to let flex handle width
+                boxSizing: 'border-box'
+              }}
+            >
+              Edit Profile
+            </button>
+          )}
+          <button
+            onClick={handleLogout}
+            className="logout-btn"
+            style={{
+              flex: 1,
+              margin: 0,          // Strips out rogue margins
+              padding: '12px 0',  // Identical vertical padding
+              boxSizing: 'border-box'
+            }}
+          >
+            Log out
+          </button>
+        </div>
       </div>
     </div>
   );
