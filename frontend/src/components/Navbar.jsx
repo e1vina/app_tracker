@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
 import image from "../assets/logo.svg"
+import ThemeToggle from "./ThemeToggle"
 import "./navbar.css"
 
 const NavItem = ({ link, onNavigate }) => {
@@ -94,6 +95,7 @@ const Navbar = ({ links }) => {
       )}
 
       <nav className={`navbar-menu${menuOpen ? " is-open" : ""}`}>
+        <ThemeToggle />
         <ul className="navbar-list">
           {links.map((link) => (
             <li key={link.label}>

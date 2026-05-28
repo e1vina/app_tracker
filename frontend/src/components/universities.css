@@ -1,9 +1,9 @@
 .unis-wrapper {
-  background-color: #F7F8FC;
+  background-color: transparent;
   min-height: 100vh;
   padding: 2rem;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  color: #1e293b;
+  color: var(--text-primary);
 }
 
 .unis-page {
@@ -33,18 +33,18 @@
   flex-direction: column;
   gap: 1.5rem;
   margin-bottom: 2rem;
-  background: #ffffff;
+  background: var(--card-bg);
   padding: 1.5rem;
   border-radius: 12px;
-  border: 1px solid #EAEAF2;
+  border: 1px solid var(--border-light);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
 }
 
 .search-bar input {
   width: 100%;
   padding: 0.85rem 1.2rem;
-  background-color: #F7F8FC;
-  border: 1px solid #EAEAF2;
+  background-color: var(--input-bg);
+  border: 1px solid var(--border-light);
   border-radius: 8px;
   font-size: 0.95rem;
   outline: none;
@@ -53,7 +53,7 @@
 
 .search-bar input:focus {
   border-color: #5544D4;
-  background-color: #ffffff;
+  background-color: var(--card-bg);
   box-shadow: 0 0 0 3px rgba(85, 68, 212, 0.1);
 }
 
@@ -90,7 +90,7 @@
 }
 
 .chip:hover {
-  background: #EAEAF2;
+  background: var(--border-light);
 }
 
 .chip.on {
@@ -107,8 +107,8 @@
 }
 
 .uni-card {
-  background: #ffffff;
-  border: 1px solid #EAEAF2;
+  background: var(--card-bg);
+  border: 1px solid var(--border-light);
   border-radius: 12px;
   padding: 1.5rem;
   cursor: pointer;
@@ -142,7 +142,7 @@
 .uni-name {
   font-weight: 700;
   font-size: 1.1rem;
-  color: #1e293b;
+  color: var(--text-primary);
   margin-bottom: 0.2rem;
 }
 
@@ -167,19 +167,19 @@
 }
 
 .tag {
-  background: #F7F8FC;
+  background: var(--surface-bg);
   color: #475569;
   padding: 0.35rem 0.75rem;
   border-radius: 6px;
   font-size: 0.75rem;
   font-weight: 500;
-  border: 1px solid #EAEAF2;
+  border: 1px solid var(--border-light);
 }
 
 .uni-card-bottom {
   display: flex;
   justify-content: space-between;
-  border-top: 1px dashed #EAEAF2;
+  border-top: 1px dashed var(--border-light);
   padding-top: 1.25rem;
   margin-top: auto;
 }
@@ -198,16 +198,56 @@
   font-weight: 600;
 }
 
+/* Dark theme color overrides */
+[data-theme="dark"] .unis-title {
+  color: #c8c2ff;
+  font-size: 1.95rem;
+}
+
+[data-theme="dark"] .unis-sub {
+  color: #d8d4ec;
+  font-size: 1.05rem;
+}
+
+[data-theme="dark"] .filter-label {
+  color: #d8d4ec;
+}
+
+[data-theme="dark"] .chip {
+  background: #3a3848;
+  color: #d8d4ec;
+}
+
+[data-theme="dark"] .chip.on {
+  background: #534ab7;
+  color: #ffffff;
+  border-color: #7c6ff0;
+}
+
+[data-theme="dark"] .uni-country {
+  color: #d8d4ec;
+}
+
+[data-theme="dark"] .tag {
+  background: #2e2c3c;
+  color: #d8d4ec;
+  border-color: #534ab7;
+}
+
+[data-theme="dark"] .detail-label {
+  color: #d8d4ec;
+}
+
 .detail-val {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--text-primary);
 }
 
 .no-results {
   text-align: center;
   padding: 4rem 2rem;
-  background: #ffffff;
+  background: var(--card-bg);
   border-radius: 12px;
   border: 1px dashed #CFCBE9;
   color: #64748b;
@@ -231,4 +271,36 @@
 
 .no-results button:hover {
   background: #4032a8;
+}
+
+/* Match Tiers (Replaces dynamic style objects) */
+.uni-match[data-match-tier="high"] {
+  color: #27500A;
+  background-color: #EAF3DE;
+}
+
+.uni-match[data-match-tier="mid"] {
+  color: #633806;
+  background-color: #FAEEDA;
+}
+
+.uni-match[data-match-tier="low"] {
+  color: #555560;
+  background-color: #F7F7FB;
+}
+
+/* Program Type Variants */
+.detail-val[data-type-variant="exchange"] {
+  color: #0C447C;
+}
+
+.detail-val[data-type-variant="study-abroad"] {
+  color: #633806;
+}
+
+/* Accessibility Focus States for Keyboard Nav */
+.uni-card:focus-visible {
+  outline: 2px solid #0C447C;
+  outline-offset: 4px;
+  cursor: pointer;
 }

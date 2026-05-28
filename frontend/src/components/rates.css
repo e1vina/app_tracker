@@ -5,9 +5,9 @@
   align-items: center;
   gap: 48px 72px;
   padding: 56px 24px;
-  border-top: 0.5px solid #e8e8f0;
-  border-bottom: 0.5px solid #e8e8f0;
-  background: #ffffff;
+  border-top: 0.5px solid var(--border-color);
+  border-bottom: 0.5px solid var(--border-color);
+  background: transparent;
 }
 
 .stat-item {
@@ -21,7 +21,7 @@
 .stat-number {
   font-size: clamp(2.75rem, 6vw, 3.5rem);
   font-weight: 900;
-  color: #534ab7;
+  color: var(--accent);
   font-family: Arial, Helvetica, sans-serif;
   min-width: 120px;
   text-align: center;
@@ -30,7 +30,7 @@
 .stat-label {
   font-size: 1.1rem;
   font-weight: 500;
-  color: #444;
+  color: var(--text-secondary);
   font-family: Arial, sans-serif;
   text-align: center;
 }

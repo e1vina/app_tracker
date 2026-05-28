@@ -1,17 +1,12 @@
 :root {
-  --primary-purple: #5b4fe8;
-  --bg-main: #f5f6f9;
-  --bg-card: #ffffff;
-  --bg-input: #f8f9fc;
-  --border-light: #e5e7eb;
-  --border-card: #d1d5db;
-  --text-main: #1f2937;
-  --text-label: #6b7280;
-  --text-blue: #4b44b5;
+  --bg-main: var(--page-bg);
+  --bg-card: var(--card-bg);
+  --bg-input: var(--input-bg);
+  --border-light: var(--border-color);
 }
 
 .add-app-wrapper {
-  background-color: var(--bg-main);
+  background-color: transparent;
   min-height: 100vh;
   padding: 40px 20px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -134,7 +129,7 @@
 .input-group select:focus {
   outline: none;
   border-color: var(--primary-purple);
-  background-color: #fff;
+  background-color: var(--card-bg);
 }
 
 .input-group input:disabled {
@@ -219,7 +214,7 @@
   min-width: 18px;
   border: 1.5px solid #d1d5db;
   border-radius: 5px;
-  background: #ffffff;
+  background: var(--card-bg);
   cursor: pointer;
   margin-right: 14px;
   display: grid;
@@ -238,7 +233,7 @@
   display: block;
   width: 5px;
   height: 9px;
-  border: 2px solid #ffffff;
+  border: 2px solid var(--card-bg);
   border-top: none;
   border-left: none;
   transform: rotate(45deg) translate(-1px, -1px);
@@ -254,4 +249,58 @@
   .form-cards-container {
     grid-template-columns: 1fr;
   }
+}
+
+/* Dark theme color overrides */
+[data-theme="dark"] .btn-back {
+  background-color: var(--card-bg);
+  border-color: #7c6ff0;
+  color: #c8c2ff;
+}
+
+[data-theme="dark"] .btn-back:hover {
+  background-color: #2d2650;
+}
+
+[data-theme="dark"] .header-titles h1 {
+  color: #c8c2ff;
+}
+
+[data-theme="dark"] .header-titles p {
+  color: #d8d4ec;
+}
+
+[data-theme="dark"] .card-title {
+  color: #d8d4ec;
+}
+
+[data-theme="dark"] .input-group label {
+  color: #d8d4ec;
+}
+
+[data-theme="dark"] .input-group input,
+[data-theme="dark"] .input-group select {
+  background-color: var(--input-bg);
+  border-color: transparent;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .input-group input:focus,
+[data-theme="dark"] .input-group select:focus {
+  border-color: #7c6ff0;
+  background-color: var(--card-bg);
+}
+
+[data-theme="dark"] .Echecklist-text {
+  color: #d8d4ec;
+}
+
+[data-theme="dark"] .btn-cancel {
+  background-color: var(--card-bg);
+  border-color: #7c6ff0;
+  color: #d8d4ec;
+}
+
+[data-theme="dark"] .form-card label input[type="checkbox"] {
+  border-color: #7c6ff0;
 }

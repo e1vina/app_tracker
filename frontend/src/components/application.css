@@ -1,18 +1,13 @@
 :root {
-  --primary-purple: #5b4fe8;
-  --bg-main: #f5f6f9;
-  --bg-card: #ffffff;
-  --bg-input: #f8f9fc;
-  --border-light: #e5e7eb;
-  --border-card: #d1d5db;
-  --text-main: #1f2937;
-  --text-label: #6b7280;
-  --text-blue: #4b44b5;
+  --bg-main: var(--page-bg);
+  --bg-card: var(--card-bg);
+  --bg-input: var(--input-bg);
+  --border-light: var(--border-color);
 }
 
 /* ── Wrapper ── */
 .application-wrapper {
-  background-color: var(--bg-main);
+  background-color: transparent;
   min-height: 100vh;
   padding: 40px 20px 60px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -127,7 +122,7 @@
   margin: 0 0 4px;
 }
 
-.application-top > div:first-child p {
+.application-top>div:first-child p {
   font-size: 13px;
   color: var(--text-label);
   margin: 0;
@@ -259,4 +254,64 @@
     flex-direction: column;
     gap: 8px;
   }
+}
+
+/* Dark theme color overrides */
+[data-theme="dark"] .application-header h1 {
+  color: #c8c2ff;
+  font-size: 26px;
+}
+
+[data-theme="dark"] .application-header p {
+  color: #d8d4ec;
+}
+
+[data-theme="dark"] .empty-applications h3 {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .empty-applications p {
+  color: #d8d4ec;
+}
+
+[data-theme="dark"] .application-top h2 {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .application-top>div:first-child p {
+  color: #d8d4ec;
+}
+
+[data-theme="dark"] .detail-row span:first-child {
+  color: #d8d4ec;
+}
+
+[data-theme="dark"] .detail-row span:last-child {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .progress-label {
+  color: #d8d4ec;
+}
+
+[data-theme="dark"] .edit-btn {
+  background: var(--input-bg);
+  color: #c8c2ff;
+  border-color: #7c6ff0;
+}
+
+[data-theme="dark"] .edit-btn:hover {
+  background: #2d2650;
+  border-color: #9589f5;
+}
+
+[data-theme="dark"] .delete-btn {
+  background: var(--input-bg);
+  color: #ff9999;
+  border-color: #c74545;
+}
+
+[data-theme="dark"] .delete-btn:hover {
+  background: #3a2020;
+  border-color: #ff6b6b;
 }

@@ -1,0 +1,44 @@
+.app-root {
+  position: relative;
+}
+
+.app-content {
+  position: relative;
+  min-height: 100vh;
+}
+
+.app-ui {
+  position: relative;
+  z-index: 2;
+}
+
+.mouse-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(
+    circle closest-side,
+    var(--glow-1) 0%,
+    var(--glow-2) 32%,
+    var(--glow-3) 58%,
+    transparent 78%
+  );
+  will-change: transform, opacity;
+}
+
+.mouse-glow--active {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce), (pointer: coarse) {
+  .mouse-glow {
+    display: none;
+  }
+}

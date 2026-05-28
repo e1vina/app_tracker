@@ -1,0 +1,148 @@
+/* Dark mode is the default */
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --page-bg: #0f0d14;
+  --page-bg-muted: #16141f;
+  --surface-bg: #1c1a26;
+  --card-bg: #23212f;
+  --input-bg: #2a2838;
+
+  --text-primary: #ffffff;
+  --text-secondary: #e8e6f4;
+  --text-muted: #d8d4ec;
+
+  --text-xs: 1.04rem;
+  --text-sm: 1.15rem;
+  --text-base: 1.22rem;
+  --text-md: 1.32rem;
+  --text-lg: 1.5rem;
+  --text-xl: 1.725rem;
+
+  --border-color: #3a3848;
+  --border-light: #2e2c3c;
+
+  --nav-bg: #18161f;
+  --nav-border: #2e2c3c;
+  --nav-text: #f2f0fa;
+  --nav-hover: #2a2838;
+
+  --accent: #7c6ff0;
+  --accent-hover: #9589f5;
+  --accent-soft: #2d2650;
+  --accent-muted: #534ab7;
+  --accent-text: #c8c2ff;
+
+  --primary-purple: #7c6ff0;
+  --text-main: var(--text-primary);
+  --text-label: var(--text-muted);
+  --text-blue: var(--accent-text);
+  --border-card: var(--border-color);
+
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.28);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.38);
+  --overlay: rgba(0, 0, 0, 0.6);
+
+  --glow-1: rgba(124, 111, 240, 0.32);
+  --glow-2: rgba(148, 120, 255, 0.2);
+  --glow-3: rgba(176, 168, 232, 0.1);
+
+  --info-bg: #1e1a32;
+  --info-heading: #9589f5;
+  --hero-tag-bg: #2d2650;
+  --hero-tag-border: #534ab7;
+  --hero-tag-text: #c8c2ff;
+
+  --faq-cat-bg: rgba(35, 33, 47, 0.9);
+  --faq-item-bg: rgba(35, 33, 47, 0.95);
+  --faq-border: #3a3848;
+
+  --avatar-bg: #2d2650;
+  --avatar-text: #c8c2ff;
+  --avatar-hover: #534ab7;
+
+  --nav-btn-secondary-bg: #2d2650;
+  --nav-btn-secondary-border: #534ab7;
+  --nav-link-hover-bg: rgba(124, 111, 240, 0.14);
+  --nav-link-hover-glow: 0 0 22px rgba(124, 111, 240, 0.45);
+  --nav-btn-hover-glow: 0 6px 24px rgba(124, 111, 240, 0.5);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --page-bg: #f0eef8;
+  --page-bg-muted: #e8e6f4;
+  --surface-bg: #f7f5fc;
+  --card-bg: #ffffff;
+  --input-bg: #f5f3fc;
+
+  --text-primary: #0d0b12;
+  --text-secondary: #2a2735;
+  --text-muted: #4a4658;
+
+  --text-xs: 0.9rem;
+  --text-sm: 1rem;
+  --text-base: 1.0625rem;
+  --text-md: 1.15rem;
+  --text-lg: 1.3rem;
+  --text-xl: 1.5rem;
+
+  --border-color: #e8e8f0;
+  --border-light: #eaeaf2;
+
+  --nav-bg: #ffffff;
+  --nav-border: #e8e8f0;
+  --nav-text: #161312;
+  --nav-hover: #f0f0f8;
+
+  --accent: #534ab7;
+  --accent-hover: #453da0;
+  --accent-soft: #eeedfe;
+  --accent-muted: #afa9ec;
+  --accent-text: #3c3489;
+
+  --primary-purple: #5b4fe8;
+  --text-main: #1f2937;
+  --text-label: #6b7280;
+  --text-blue: #4b44b5;
+  --border-card: #d1d5db;
+
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+  --overlay: rgba(13, 13, 13, 0.35);
+
+  --glow-1: rgba(83, 74, 183, 0.55);
+  --glow-2: rgba(116, 92, 235, 0.38);
+  --glow-3: rgba(176, 168, 232, 0.22);
+
+  --info-bg: #eeedfe;
+  --info-heading: #534ab7;
+  --hero-tag-bg: #eeedfe;
+  --hero-tag-border: #afa9ec;
+  --hero-tag-text: #3c3489;
+
+  --faq-cat-bg: rgba(255, 255, 255, 0.75);
+  --faq-item-bg: rgba(255, 255, 255, 0.85);
+  --faq-border: #e8ecf5;
+
+  --avatar-bg: #eeedfe;
+  --avatar-text: #3c3489;
+  --avatar-hover: #afa9ec;
+
+  --nav-btn-secondary-bg: #eeedfe;
+  --nav-btn-secondary-border: #afa9ec;
+  --nav-link-hover-bg: rgba(83, 74, 183, 0.1);
+  --nav-link-hover-glow: 0 0 18px rgba(83, 74, 183, 0.28);
+  --nav-btn-hover-glow: 0 6px 20px rgba(83, 74, 183, 0.35);
+}
+
+/* Dark theme color overrides for hardcoded colors */
+[data-theme="dark"] {
+  --dark-override-primary: #ffffff;
+  --dark-override-secondary: #e8e6f4;
+  --dark-override-muted: #d8d4ec;
+  --dark-override-subtle: #bbb9d0;
+  --dark-override-light: #9895b8;
+}

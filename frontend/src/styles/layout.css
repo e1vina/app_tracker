@@ -2,6 +2,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: transparent;
 }
 
 .app-layout main {
@@ -27,18 +28,18 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 32px 24px;
-  font-size: 1.1rem;
+  font-size: var(--text-md);
 }
 
 .page-content h1 {
-  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-size: clamp(2.15rem, 5.5vw, 3rem);
   font-weight: 800;
   margin-bottom: 12px;
 }
 
 .page-content p {
-  font-size: 1.15rem;
-  color: #444;
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
 }
 
 @media (max-width: 768px) {

@@ -42,3 +42,8 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Dark theme color overrides */
+[data-theme="dark"] .form-check {
+  color: #d8d4ec;
+}

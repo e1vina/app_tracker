@@ -1,71 +1,9 @@
-import { useState } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import "../components/universities.css"
 
-const universitiesData = [
-  {
-    flag: "🇩🇪",
-    name: "TU Munich",
-    country: "Germany",
-    programs: ["Engineering", "Computer Science"],
-    minGPA: 3.2,
-    deadline: "Nov 30",
-    language: "English",
-    match: 93,
-    type: "Exchange",
-    region: "europe",
-  },
-  {
-    flag: "🇸🇪",
-    name: "KTH Royal Institute",
-    country: "Sweden",
-    programs: ["Technology", "Engineering"],
-    minGPA: 3.0,
-    deadline: "Jan 15",
-    language: "English",
-    match: 88,
-    type: "Exchange",
-    region: "europe",
-  },
-  {
-    flag: "🇧🇪",
-    name: "KU Leuven",
-    country: "Belgium",
-    programs: ["All programs"],
-    minGPA: 3.0,
-    deadline: "Feb 1",
-    language: "English",
-    match: 85,
-    type: "Exchange",
-    region: "europe",
-  },
-  {
-    flag: "🇳🇱",
-    name: "University of Amsterdam",
-    country: "Netherlands",
-    programs: ["Data Science", "Business"],
-    minGPA: 3.1,
-    deadline: "Feb 15",
-    language: "English",
-    match: 82,
-    type: "Study Abroad",
-    region: "europe",
-  },
-  {
-    flag: "🇨🇦",
-    name: "University of Toronto",
-    country: "Canada",
-    programs: ["All programs"],
-    minGPA: 3.3,
-    deadline: "Feb 1",
-    language: "English",
-    match: 81,
-    type: "Study Abroad",
-    region: "americas",
-  },
-]
-
-const regions = ["all", "europe", "americas", "asia"]
+// Data is now fetched from backend API
+const regions = ["all", "africa", "europe", "americas", "asia"]
 const types = ["all", "Exchange", "Study Abroad"]
 
 const Universities = () => {
@@ -74,23 +12,58 @@ const Universities = () => {
   const [search, setSearch] = useState("")
   const [region, setRegion] = useState("all")
   const [type, setType] = useState("all")
+  const [universitiesData, setUniversitiesData] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
-  const filtered = universitiesData.filter((u) => {
-    const matchSearch =
-      u.name.toLowerCase().includes(search.toLowerCase()) ||
-      u.country.toLowerCase().includes(search.toLowerCase()) ||
-      u.programs.some((p) =>
-        p.toLowerCase().includes(search.toLowerCase())
-      )
+  // Fetch universities on mount
+  useEffect(() => {
+    let mounted = true
+    setLoading(true)
+    fetch('http://localhost:5000/api/universities')
+      .then((res) => {
+        if (!res.ok) throw new Error('Network response was not ok')
+        return res.json()
+      })
+      .then((data) => {
+        if (!mounted) return
+        setUniversitiesData(Array.isArray(data) ? data : [])
+        setError(null)
+      })
+      .catch((err) => {
+        console.error('Fetch error:', err)
+        if (!mounted) return
+        setError('Unable to load universities')
+      })
+      .finally(() => {
+        if (!mounted) return
+        setLoading(false)
+      })
 
-    const matchRegion =
-      region === "all" || u.region === region
+    return () => {
+      mounted = false
+    }
+  }, [])
 
-    const matchType =
-      type === "all" || u.type === type
+  // 1. Memoized filtering logic to boost performance during user typing
+  const filtered = useMemo(() => {
+    if (!universitiesData || universitiesData.length === 0) return []
 
-    return matchSearch && matchRegion && matchType
-  })
+    const q = search.trim().toLowerCase()
+
+    return universitiesData.filter((u) => {
+      const matchSearch =
+        u.name.toLowerCase().includes(q) ||
+        u.country.toLowerCase().includes(q) ||
+        (Array.isArray(u.programs) &&
+          u.programs.some((p) => p.toLowerCase().includes(q)))
+
+      const matchRegion = region === 'all' || u.region === region
+      const matchType = type === 'all' || u.type === type
+
+      return matchSearch && matchRegion && matchType
+    })
+  }, [search, region, type, universitiesData])
 
   const handleCardClick = (university) => {
     navigate("/application/new", {
@@ -98,199 +71,154 @@ const Universities = () => {
     })
   }
 
+  // Helper function to handle 'Enter' or 'Space' keyboard actions for accessibility
+  const handleKeyDown = (e, university) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault()
+      handleCardClick(university)
+    }
+  }
+
+  // Helper utility to calculate match tier cleanly
+  const getMatchTier = (matchScore) => {
+    if (matchScore >= 85) return "high"
+    if (matchScore >= 75) return "mid"
+    return "low"
+  }
+
   return (
     <div className="unis-wrapper">
       <div className="unis-page">
-
-        <div className="unis-header">
-          <h1 className="unis-title">
-            Partner universities
-          </h1>
-
-          <p className="unis-sub">
-            {filtered.length} universities available
-          </p>
-        </div>
-
-        <div className="unis-filters">
-
-          <div className="search-bar">
-            <input
-              type="text"
-              placeholder="Search by name, country or program…"
-              value={search}
-              onChange={(e) =>
-                setSearch(e.target.value)
-              }
-            />
-          </div>
-
-          <div className="filter-row">
-
-            <div className="filter-group">
-              <span className="filter-label">
-                Region
-              </span>
-
-              {regions.map((r) => (
-                <button
-                  key={r}
-                  className={`chip ${
-                    region === r ? "on" : ""
-                  }`}
-                  onClick={() => setRegion(r)}
-                >
-                  {r.charAt(0).toUpperCase() +
-                    r.slice(1)}
-                </button>
-              ))}
-            </div>
-
-            <div className="filter-group">
-              <span className="filter-label">
-                Type
-              </span>
-
-              {types.map((t) => (
-                <button
-                  key={t}
-                  className={`chip ${
-                    type === t ? "on" : ""
-                  }`}
-                  onClick={() => setType(t)}
-                >
-                  {t}
-                </button>
-              ))}
-            </div>
-
-          </div>
-        </div>
-
-        {filtered.length === 0 ? (
+        {loading ? (
           <div className="no-results">
-            <p>
-              No universities match your search.
-            </p>
-
-            <button
-              onClick={() => {
-                setSearch("")
-                setRegion("all")
-                setType("all")
-              }}
-            >
-              Clear filters
-            </button>
+            <p>Loading universities…</p>
+          </div>
+        ) : error ? (
+          <div className="no-results">
+            <p>{error}</p>
+            <button onClick={() => window.location.reload()}>Retry</button>
           </div>
         ) : (
-          <div className="unis-grid">
+          <>
+            <div className="unis-header">
+              <h1 className="unis-title">Partner universities</h1>
+              <p className="unis-sub">{filtered.length} universities available</p>
+            </div>
 
-            {filtered.map((u, i) => (
-              <div
-                className="uni-card"
-                key={i}
-                onClick={() =>
-                  handleCardClick(u)
-                }
-              >
+            <div className="unis-filters">
+              <div className="search-bar">
+                <input
+                  type="text"
+                  placeholder="Search by name, country or program…"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+              </div>
 
-                <div className="uni-card-top">
-
-                  <div className="uni-flag">
-                    {u.flag}
-                  </div>
-
-                  <div className="uni-info">
-
-                    <div className="uni-name">
-                      {u.name}
-                    </div>
-
-                    <div className="uni-country">
-                      {u.country}
-                    </div>
-
-                  </div>
-
-                  <div
-                    className="uni-match"
-                    style={{
-                      color:
-                        u.match >= 85
-                          ? "#27500A"
-                          : u.match >= 75
-                          ? "#633806"
-                          : "#555560",
-
-                      background:
-                        u.match >= 85
-                          ? "#EAF3DE"
-                          : u.match >= 75
-                          ? "#FAEEDA"
-                          : "#F7F7FB",
-                    }}
-                  >
-                    {u.match}% match
-                  </div>
-                </div>
-
-                <div className="uni-tags">
-                  {u.programs.map((p, j) => (
-                    <span
-                      className="tag"
-                      key={j}
+              <div className="filter-row">
+                <div className="filter-group">
+                  <span className="filter-label">Region</span>
+                  {regions.map((r) => (
+                    <button
+                      key={r}
+                      className={`chip ${region === r ? "on" : ""}`}
+                      onClick={() => setRegion(r)}
                     >
-                      {p}
-                    </span>
+                      {r.charAt(0).toUpperCase() + r.slice(1)}
+                    </button>
                   ))}
                 </div>
 
-                <div className="uni-card-bottom">
-
-                  <div className="uni-detail">
-                    <span className="detail-label">
-                      Min. GPA
-                    </span>
-
-                    <span className="detail-val">
-                      {u.minGPA}
-                    </span>
-                  </div>
-
-                  <div className="uni-detail">
-                    <span className="detail-label">
-                      Deadline
-                    </span>
-
-                    <span className="detail-val">
-                      {u.deadline}
-                    </span>
-                  </div>
-
-                  <div className="uni-detail">
-                    <span className="detail-label">
-                      Type
-                    </span>
-
-                    <span
-                      className="detail-val"
-                      style={{
-                        color:
-                          u.type === "Exchange"
-                            ? "#0C447C"
-                            : "#633806",
-                      }}
+                <div className="filter-group">
+                  <span className="filter-label">Type</span>
+                  {types.map((t) => (
+                    <button
+                      key={t}
+                      className={`chip ${type === t ? "on" : ""}`}
+                      onClick={() => setType(t)}
                     >
-                      {u.type}
-                    </span>
-                  </div>
-
+                      {t}
+                    </button>
+                  ))}
                 </div>
               </div>
-            ))}
+            </div>
 
-          </div>
+            {filtered.length === 0 ? (
+              <div className="no-results">
+                <p>No universities match your search.</p>
+                <button
+                  onClick={() => {
+                    setSearch('')
+                    setRegion('all')
+                    setType('all')
+                  }}
+                >
+                  Clear filters
+                </button>
+              </div>
+            ) : (
+              <div className="unis-grid">
+                {filtered.map((u) => (
+                  <div
+                    className="uni-card"
+                    key={u.name} // using unique data property instead of array index
+                    onClick={() => handleCardClick(u)}
+                    onKeyDown={(e) => handleKeyDown(e, u)} // Keyboard accessibility
+                    tabIndex={0}
+                    role="button"
+                    aria-label={`View details for ${u.name}`}
+                  >
+                    <div className="uni-card-top">
+                      <div className="uni-flag">{u.flag}</div>
+                      <div className="uni-info">
+                        <div className="uni-name">{u.name}</div>
+                        <div className="uni-country">{u.country}</div>
+                      </div>
+
+                      <div
+                        className="uni-match"
+                        data-match-tier={getMatchTier(u.match)}
+                      >
+                        {u.match}% match
+                      </div>
+                    </div>
+
+                    <div className="uni-tags">
+                      {Array.isArray(u.programs) &&
+                        u.programs.map((p) => (
+                          <span className="tag" key={p}>
+                            {p}
+                          </span>
+                        ))}
+                    </div>
+
+                    <div className="uni-card-bottom">
+                      <div className="uni-detail">
+                        <span className="detail-label">Min. GPA</span>
+                        <span className="detail-val">{u.minGPA}</span>
+                      </div>
+
+                      <div className="uni-detail">
+                        <span className="detail-label">Deadline</span>
+                        <span className="detail-val">{u.deadline}</span>
+                      </div>
+
+                      <div className="uni-detail">
+                        <span className="detail-label">Type</span>
+                        <span
+                          className="detail-val"
+                          data-type-variant={u.type === 'Exchange' ? 'exchange' : 'study-abroad'}
+                        >
+                          {u.type}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>

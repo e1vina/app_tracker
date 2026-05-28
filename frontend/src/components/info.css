@@ -1,5 +1,5 @@
 #info {
-  background-color: #eeedfe;
+  background-color: var(--info-bg);
   padding: 88px 24px;
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -15,7 +15,7 @@
 }
 
 .about {
-  color: #534ab7;
+  color: var(--info-heading);
   font-size: clamp(2.5rem, 6vw, 3.25rem);
   font-weight: 900;
 }
@@ -27,7 +27,7 @@
 }
 
 .card {
-  background: #fff;
+  background: var(--card-bg);
   border-radius: 16px;
   padding: 32px 28px;
   box-shadow: 0 2px 12px rgba(83, 74, 183, 0.08);
@@ -40,14 +40,14 @@
 
 .card h3 {
   font-size: 1.45rem;
-  color: #534ab7;
+  color: var(--info-heading);
   font-weight: 800;
   margin: 18px 0 12px;
 }
 
 .card p {
   line-height: 1.65;
-  color: #444;
+  color: var(--text-secondary);
   font-size: 1.1rem;
 }
 
@@ -65,4 +65,18 @@
   .card-container {
     grid-template-columns: 1fr;
   }
+}
+
+/* Dark theme color overrides */
+[data-theme="dark"] .about {
+  font-size: clamp(2.75rem, 6.5vw, 3.5rem);
+}
+
+[data-theme="dark"] .card h3 {
+  font-size: 1.6rem;
+}
+
+[data-theme="dark"] .card p {
+  font-size: 1.2rem;
+  color: #d8d4ec;
 }

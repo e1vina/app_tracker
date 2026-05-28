@@ -60,7 +60,7 @@
   align-items: center;
   justify-content: center;
   padding: 64px 48px 80px;
-  background-color: #f7f6f2;
+  background-color: transparent;
 }
 
 .auth-panel {
@@ -78,7 +78,7 @@
   font-size: 2rem;
   font-weight: 800;
   margin-bottom: 12px;
-  color: #161312;
+  color: var(--text-primary);
 }
 
 .auth-panel form,
@@ -90,7 +90,7 @@
   font-size: 1.05rem;
   margin-top: 6px;
   margin-bottom: 20px;
-  color: #444;
+  color: var(--text-secondary);
 }
 
 .no-account a,
@@ -122,8 +122,9 @@
   outline: none;
   font-family: Arial, sans-serif;
   font-size: 1.05rem;
-  border: 2px solid #e8e8f0;
-  background: #fff;
+  border: 2px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-primary);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -207,4 +208,75 @@
   .auth-panel h3 {
     font-size: 1.75rem;
   }
+}
+
+/* Dark theme color overrides */
+[data-theme="dark"] .split-logo {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .split-text h2 {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  color: #ffffff;
+  text-shadow: #1a0f2e 1px 1px 2px;
+}
+
+[data-theme="dark"] .split-text p {
+  font-size: 1.2rem;
+  color: #e8e6f4;
+}
+
+[data-theme="dark"] .pick {
+  font-size: 1.3rem;
+  color: #e8e6f4;
+}
+
+[data-theme="dark"] .text-body {
+  color: #e8e6f4;
+  font-size: 1.1rem;
+}
+
+[data-theme="dark"] .auth-panel h3 {
+  color: #ffffff;
+  font-size: 2.2rem;
+}
+
+[data-theme="dark"] .no-account {
+  font-size: 1.15rem;
+  color: #d8d4ec;
+}
+
+[data-theme="dark"] .no-account a,
+[data-theme="dark"] .signin-link,
+[data-theme="dark"] .signup-link {
+  color: #c8c2ff;
+}
+
+[data-theme="dark"] .terms-note {
+  font-size: 1.05rem;
+  color: #d8d4ec;
+}
+
+[data-theme="dark"] .input,
+[data-theme="dark"] .form-group input {
+  font-size: 1.15rem;
+  border-color: #534ab7;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .input:focus,
+[data-theme="dark"] .form-group input:focus {
+  border-color: #7c6ff0;
+  box-shadow: 0 0 0 4px rgba(124, 111, 240, 0.25);
+}
+
+[data-theme="dark"] .signin-btn,
+[data-theme="dark"] .signup-btn {
+  font-size: 1.2rem;
+  background: #7c6ff0;
+}
+
+[data-theme="dark"] .signin-btn:hover,
+[data-theme="dark"] .signup-btn:hover {
+  background: #9589f5;
 }

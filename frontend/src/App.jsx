@@ -1,4 +1,5 @@
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import MouseGlow from "./components/MouseGlow.jsx";
 import Home from "./pages/Home.jsx";
 import Faq from "./pages/Faq.jsx";
 import LogIn from "./pages/LogIn.jsx";
@@ -14,7 +15,10 @@ import EditApplication from "./pages/EditApplication.jsx";
 
 const App = () => {
   return (
-    <div>
+    <div className="app-root">
+      <div className="app-content">
+      <MouseGlow />
+      <div className="app-ui">
       <Router>
         <Routes>
           <Route element={<Layout />}>
@@ -35,6 +39,8 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
         </Routes>
       </Router>
+      </div>
+      </div>
     </div>
   );
 };

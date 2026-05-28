@@ -18,16 +18,15 @@ mongoose.connect(mongoDBURL)
     .catch(err => console.error('MongoDB connection failed:', err.message));
 
 // 1. Import your custom auth router
-const authRoutes = require('./routes/auth');
+const authRoutes = require('./routes/auth')
+const universitiesRoutes = require('./routes/universities')
 
-// 2. Link the router to a specific URL path
-// This means all routes inside auth.js will automatically start with /api/auth
-app.use('/api/auth', authRoutes);
+// 2. Link the routers to specific URL paths
+app.use('/api/auth', authRoutes)
+app.use('/api/universities', universitiesRoutes)
 
-// Example: Your URLs are now http://localhost:3000/api/auth/register
-// and http://localhost:3000/api/auth/login
-
-const PORT = process.env.PORT || 3000;
+// Use port 5000 for API server (frontend fetches http://localhost:5000)
+const PORT = process.env.PORT || 5000
 app.listen(PORT, () => {
-    console.log(`Server is up and running on port ${PORT}`);
-});
+    console.log(`Server is up and running on port ${PORT}`)
+})
