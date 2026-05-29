@@ -49,7 +49,7 @@ const Application = () => {
   }
 
   return (
-    <div className="application-wrapper">
+    <div className="application-wrapper grenze-gotisch-500">
       <div className="application-page">
 
         {/* HEADER */}
@@ -153,9 +153,8 @@ const Application = () => {
                     <div
                       className="progress-fill"
                       style={{
-                        width: `${
-                          app.progress || 0
-                        }%`,
+                        width: `${app.progress || 0
+                          }%`,
                       }}
                     />
                   </div>

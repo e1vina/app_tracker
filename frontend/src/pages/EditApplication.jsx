@@ -22,6 +22,7 @@ const EditApplication = () => {
   const [formData, setFormData] = useState({
     ...app,
     checklist: app.checklist || {},
+    programs: app.programs || [],
   })
 
   const handleChange = (e) => {
@@ -41,14 +42,27 @@ const EditApplication = () => {
     })
   }
 
+  const calculateProgress = (checklist) => {
+    const items = Object.keys(checklist)
+    if (items.length === 0) return 0
+    const checked = Object.values(checklist).filter(Boolean).length
+    return Math.round((checked / items.length) * 100)
+  }
+
   const handleSave = (e) => {
     e.preventDefault()
+
+    const progress = calculateProgress(formData.checklist)
+    const updatedFormData = {
+      ...formData,
+      progress,
+    }
 
     const existing =
       JSON.parse(localStorage.getItem("applications")) || []
 
     const updated = existing.map((a) =>
-      a.id === formData.id ? formData : a
+      a.id === formData.id ? updatedFormData : a
     )
 
     localStorage.setItem(
@@ -75,7 +89,7 @@ const EditApplication = () => {
 
         <form onSubmit={handleSave} className="add-app-form">
           <div className="form-cards-container">
-            
+
             {/* LEFT CARD: UNIVERSITY & PROGRAM */}
             <div className="form-card">
               <div className="card-header">
@@ -98,18 +112,34 @@ const EditApplication = () => {
                   <input
                     name="country"
                     value={formData.country}
-                    onChange={handleChange}
+                    disabled
                   />
                 </div>
 
                 <div className="input-group">
                   <label>Program / Department</label>
-                  <input
-                    name="program"
-                    placeholder="e.g. Computer Science"
-                    value={formData.program}
-                    onChange={handleChange}
-                  />
+                  {Array.isArray(formData.programs) && formData.programs.length > 0 ? (
+                    <select
+                      name="program"
+                      value={formData.program}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="">Select program…</option>
+                      {formData.programs.map((program) => (
+                        <option key={program} value={program}>
+                          {program}
+                        </option>
+                      ))}
+                    </select>
+                  ) : (
+                    <input
+                      name="program"
+                      placeholder="e.g. Computer Science"
+                      value={formData.program}
+                      onChange={handleChange}
+                    />
+                  )}
                 </div>
               </div>
 
@@ -129,7 +159,7 @@ const EditApplication = () => {
                   </select>
                 </div>
 
-                 <div className="input-group">
+                <div className="input-group">
                   <label>Application deadline</label>
                   <input
                     type="date"

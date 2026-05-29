@@ -13,12 +13,12 @@
   --text-secondary: #e8e6f4;
   --text-muted: #d8d4ec;
 
-  --text-xs: 1.04rem;
-  --text-sm: 1.15rem;
-  --text-base: 1.22rem;
-  --text-md: 1.32rem;
-  --text-lg: 1.5rem;
-  --text-xl: 1.725rem;
+  --text-xs: 1.08rem;
+  --text-sm: 1.24rem;
+  --text-base: 1.34rem;
+  --text-md: 1.46rem;
+  --text-lg: 1.68rem;
+  --text-xl: 1.92rem;
 
   --border-color: #3a3848;
   --border-light: #2e2c3c;
@@ -82,12 +82,12 @@
   --text-secondary: #2a2735;
   --text-muted: #4a4658;
 
-  --text-xs: 0.9rem;
-  --text-sm: 1rem;
-  --text-base: 1.0625rem;
-  --text-md: 1.15rem;
-  --text-lg: 1.3rem;
-  --text-xl: 1.5rem;
+  --text-xs: 0.98rem;
+  --text-sm: 1.12rem;
+  --text-base: 1.2rem;
+  --text-md: 1.3rem;
+  --text-lg: 1.45rem;
+  --text-xl: 1.65rem;
 
   --border-color: #e8e8f0;
   --border-light: #eaeaf2;

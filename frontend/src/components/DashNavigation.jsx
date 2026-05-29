@@ -32,7 +32,16 @@ const DashNavigation = () => {
     { to: "/dashboard", label: "Dashboard" },
     { to: "/application", label: "Applications" },
     { to: "/universities", label: "Universities" },
-    { to: "/profile", label: initials, className: "dash-avatar" },
+    {
+      to: "/profile",
+      label: (
+        <span className="navbar-profile-label">
+          <span className="navbar-profile-icon" aria-hidden="true">👤</span>
+          <span>{initials || "Profile"}</span>
+        </span>
+      ),
+      className: "dash-avatar",
+    },
   ]
 
   return <Navbar links={navLinks} />

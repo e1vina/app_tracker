@@ -40,6 +40,7 @@ const AddApplication = () => {
     notes: "",
     checklist: defaultChecklist,
     flag: university?.flag || "🎓",
+    programs: university?.programs || [],
   })
 
   const handleChange = (e) => {
@@ -67,6 +68,7 @@ const AddApplication = () => {
     const newApp = {
       id: Date.now(),
       ...formData,
+      programs: university?.programs || formData.programs || [],
       progress: progressPercent,
       createdAt: new Date().toISOString(),
     }
@@ -129,39 +131,70 @@ const AddApplication = () => {
                   onChange={handleChange}
                   placeholder="e.g. University of Amsterdam"
                   required
+                  disabled={!!university}
                 />
               </div>
 
               <div className="form-row">
                 <div className="form-group">
                   <label>Country</label>
-                  <select name="country" value={formData.country} onChange={handleChange}>
-                    <option value="">Select country…</option>
-                    <option>Germany</option>
-                    <option>Sweden</option>
-                    <option>Netherlands</option>
-                    <option>Belgium</option>
-                    <option>France</option>
-                    <option>Canada</option>
-                    <option>USA</option>
-                    <option>Japan</option>
-                    <option>Australia</option>
-                    <option>Italy</option>
-                    <option>South Korea</option>
-                    <option>Brazil</option>
-                    <option>Other</option>
-                  </select>
+                  {university ? (
+                    <input
+                      type="text"
+                      name="country"
+                      value={formData.country}
+                      disabled
+                    />
+                  ) : (
+                    <select
+                      name="country"
+                      value={formData.country}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="">Select country…</option>
+                      <option>Germany</option>
+                      <option>Sweden</option>
+                      <option>Netherlands</option>
+                      <option>Belgium</option>
+                      <option>France</option>
+                      <option>Canada</option>
+                      <option>USA</option>
+                      <option>Japan</option>
+                      <option>Australia</option>
+                      <option>Italy</option>
+                      <option>South Korea</option>
+                      <option>Brazil</option>
+                      <option>Other</option>
+                    </select>
+                  )}
                 </div>
                 <div className="form-group">
                   <label>Program / department</label>
-                  <input
-                    type="text"
-                    name="program"
-                    value={formData.program}
-                    onChange={handleChange}
-                    placeholder="e.g. Computer Science"
-                    required
-                  />
+                  {university?.programs?.length ? (
+                    <select
+                      name="program"
+                      value={formData.program}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="">Select program…</option>
+                      {university.programs.map((program) => (
+                        <option key={program} value={program}>
+                          {program}
+                        </option>
+                      ))}
+                    </select>
+                  ) : (
+                    <input
+                      type="text"
+                      name="program"
+                      value={formData.program}
+                      onChange={handleChange}
+                      placeholder="e.g. Computer Science"
+                      required
+                    />
+                  )}
                 </div>
               </div>
 

@@ -30,19 +30,19 @@ const Dashboard = () => {
     : null
 
   const stats = [
-    { number: total,                                    label: "Applications",  color: "#0D0D0D"  },
-    { number: accepted,                                 label: "Accepted",      color: "#27500A"  },
-    { number: inProgress,                               label: "In progress",   color: "#0C447C"  },
-    { number: nextDays !== null ? `${nextDays}d` : "—", label: "Next deadline", color: "#A32D2D"  },
+    { number: total, label: "Applications", color: "#0D0D0D" },
+    { number: accepted, label: "Accepted", color: "#27500A" },
+    { number: inProgress, label: "In progress", color: "#0C447C" },
+    { number: nextDays !== null ? `${nextDays}d` : "—", label: "Next deadline", color: "#A32D2D" },
   ]
 
   // badges
   const badgeClass = {
-    Accepted:   "badge-green",
-    Applied:    "badge-blue",
-    Planned:    "badge-amber",
+    Accepted: "badge-green",
+    Applied: "badge-blue",
+    Planned: "badge-amber",
     Waitlisted: "badge-amber",
-    Rejected:   "badge-red",
+    Rejected: "badge-red",
   }
 
   //flags
@@ -74,7 +74,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
 
-      <div className="greeting">
+      <div className="greeting zen-tokyo-zoo-regular">
         <h2>{greeting}, {firstName} 👋</h2>
         <p>
           {nextDays !== null
