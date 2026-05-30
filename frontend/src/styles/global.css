@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
 *,
 *::before,
 *::after {
@@ -13,9 +15,12 @@ html {
 body {
   margin: 0;
   overflow-x: hidden;
-  font-family: "Grenze Gotisch", serif;
+  /* font-family: "Grenze Gotisch", serif; */
   font-optical-sizing: auto;
-  font-weight: 600;
+  /* font-weight: 600; */
+  font-family: "IBM Plex Serif", serif;
+  font-weight: 500;
+  font-style: normal;
   font-size: var(--text-base);
   line-height: 1.7;
   color: var(--text-primary);
@@ -27,8 +32,11 @@ body {
 
 body,
 body * {
-  font-family: "Grenze Gotisch", serif;
-  font-optical-sizing: auto;
+  /* font-family: "Grenze Gotisch", serif;*/
+  font-optical-sizing: auto;  
+  font-family: "IBM Plex Serif", serif;
+  font-weight: 500;
+  font-style: normal;
 }
 
 img {
