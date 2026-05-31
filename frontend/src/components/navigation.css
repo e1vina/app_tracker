@@ -43,3 +43,23 @@ a{
     padding: 8px 16px;
     border-radius: 4px;
 }
+
+.navbar-link.dash-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #EEEDFE;
+  color: #3C3489;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.navbar-link.dash-avatar:hover {
+  background: #AFA9EC;
+}
