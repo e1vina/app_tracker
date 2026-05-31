@@ -188,7 +188,7 @@ const Profile = () => {
           <div className="form-section-title">Academic info</div>
           <div className="form-grid">
             <div className="form-group">
-              <label>Home university</label>
+              <label>Home School Name</label>
               <input
                 type="text"
                 name="homeUniversity"

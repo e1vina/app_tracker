@@ -74,9 +74,9 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
 
-      <div className="greeting zen-tokyo-zoo-regular">
+      <div className="greeting ">
         <h2>{greeting}, {firstName} 👋</h2>
-        <p>
+        <p className="zen-tokyo-zoo-regular">
           {nextDays !== null
             ? `You have a deadline coming up in ${nextDays} days.`
             : "No upcoming deadlines."}

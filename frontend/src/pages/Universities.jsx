@@ -214,10 +214,10 @@ const Universities = () => {
                           <span className="detail-val">{u.minGPA}</span>
                         </div>
 
-                        <div className="uni-detail">
+                        {/* <div className="uni-detail">
                           <span className="detail-label">Deadline</span>
                           <span className="detail-val">{u.deadline}</span>
-                        </div>
+                        </div> */}
 
                         <div className="uni-detail">
                           <span className="detail-label">Type</span>

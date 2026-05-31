@@ -130,7 +130,7 @@ const Sign = () => {
               <input
                 type="text"
                 name="homeUniversity"
-                placeholder="Home university"
+                placeholder="Home School Name"
                 value={formData.homeUniversity}
                 onChange={handleChange}
               />
