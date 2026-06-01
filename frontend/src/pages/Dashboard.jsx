@@ -7,47 +7,6 @@ const Dashboard = () => {
 
   // Fetch user name from backend
   useEffect(() => {
-<<<<<<< HEAD
-    const fetchApplications = async () => {
-      const token = localStorage.getItem('token')
-      if (!token) return
-
-      try {
-        const res = await fetch('/api/applications', {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        if (res.ok) {
-          const data = await res.json()
-          setApplications(data)
-        }
-      } catch (error) {
-        console.error('Error loading applications:', error)
-      }
-    }
-
-    const fetchProfile = async () => {
-      const token = localStorage.getItem('token')
-      if (!token) return
-
-      try {
-        const res = await fetch('/api/auth/profile', {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        if (res.ok) {
-          const userData = await res.json()
-          setFirstName(userData.firstName || 'there')
-        }
-      } catch (error) {
-        console.error('Error loading profile:', error)
-      }
-    }
-
-    fetchApplications()
-    fetchProfile()
-  }, [])
-
-  // stats
-=======
     const fetchUser = async () => {
       try {
         const token = localStorage.getItem("token")
@@ -72,7 +31,6 @@ const Dashboard = () => {
     setApplications(saved)
   }, [])
 
->>>>>>> 4c05a0c33c0d4bdedc774345db1c794b62cbc73b
   const total = applications.length
   const accepted = applications.filter(a => a.status === "Accepted").length
   const inProgress = applications.filter(a => a.status === "Applied" || a.status === "Planned").length
