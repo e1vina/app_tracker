@@ -230,10 +230,10 @@ const Profile = () => {
                 onChange={handleChange}
                 disabled={!isEditing}
               >
-                <option>Autumn 2025</option>
-                <option>Spring 2026</option>
                 <option>Autumn 2026</option>
                 <option>Spring 2027</option>
+                <option>Autumn 2027</option>
+                <option>Spring 2028</option>
               </select>
             </div>
           </div>
