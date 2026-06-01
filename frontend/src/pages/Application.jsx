@@ -6,29 +6,61 @@ const Application = () => {
   const navigate = useNavigate()
   const [applications, setApplications] = useState([])
 
-  // LOAD DATA
   useEffect(() => {
-    const saved =
-      JSON.parse(localStorage.getItem("applications")) || []
-    setApplications(saved)
-  }, [])
+    const fetchApplications = async () => {
+      const token = localStorage.getItem('token')
+      if (!token) {
+        navigate('/login')
+        return
+      }
 
-  // DELETE APPLICATION
-  const deleteApplication = (id) => {
-    const updated = applications.filter(
-      (app) => app.id !== id
-    )
+      try {
+        const res = await fetch('/api/applications', {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        if (!res.ok) {
+          console.error('Failed to load applications')
+          return
+        }
+        const data = await res.json()
+        setApplications(data)
+      } catch (error) {
+        console.error('Error loading applications:', error)
+      }
+    }
 
-    setApplications(updated)
-    localStorage.setItem(
-      "applications",
-      JSON.stringify(updated)
-    )
+    fetchApplications()
+  }, [navigate])
+
+  const deleteApplication = async (id) => {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      navigate('/login')
+      return
+    }
+
+    try {
+      const res = await fetch(`/api/applications/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      })
+
+      if (!res.ok) {
+        const data = await res.json()
+        alert(data.message || 'Could not delete application')
+        return
+      }
+
+      setApplications((current) => current.filter((app) => (app._id || app.id) !== id))
+    } catch (error) {
+      console.error('Error deleting application:', error)
+      alert('Network error while deleting application')
+    }
   }
 
-  // EDIT APPLICATION
   const editApplication = (app) => {
-    navigate("/application/edit", {
+    const appId = app._id || app.id
+    navigate(`/application/edit/${appId}`, {
       state: { app },
     })
   }
@@ -82,110 +114,72 @@ const Application = () => {
         ) : (
           <div className="applications-grid">
 
-            {applications.map((app) => (
-              <div
-                className="application-card"
-                key={app.id}
-              >
-
-                {/* TOP */}
-                <div className="application-top">
-
-                  <div>
-                    <h2>
-                      {app.universityName}
-                    </h2>
-
-                    <p>{app.country}</p>
-                  </div>
-
-                  <div
-                    className="status-badge"
-                    style={{
-                      color: getStatusColor(
-                        app.status
-                      ),
-                    }}
-                  >
-                    {app.status}
-                  </div>
-
-                </div>
-
-                {/* DETAILS */}
-                <div className="application-details">
-
-                  <div className="detail-row">
-                    <span>Program</span>
-                    <span>{app.program}</span>
-                  </div>
-
-                  <div className="detail-row">
-                    <span>Type</span>
-                    <span>{app.type}</span>
-                  </div>
-
-                  <div className="detail-row">
-                    <span>Semester</span>
-                    <span>{app.semester}</span>
-                  </div>
-
-                  <div className="detail-row">
-                    <span>Deadline</span>
-                    <span>
-                      {app.deadline || "Not set"}
-                    </span>
-                  </div>
-
-                </div>
-
-                {/* PROGRESS */}
-                <div className="progress-section">
-
-                  <div className="progress-label">
-                    <span>Progress</span>
-                    <span>
-                      {app.progress || 0}%
-                    </span>
-                  </div>
-
-                  <div className="progress-bar">
+            {applications.map((app) => {
+              const appId = app._id || app.id
+              return (
+                <div className="application-card" key={appId}>
+                  <div className="application-top">
+                    <div>
+                      <h2>{app.universityName}</h2>
+                      <p>{app.country}</p>
+                    </div>
                     <div
-                      className="progress-fill"
-                      style={{
-                        width: `${app.progress || 0
-                          }%`,
-                      }}
-                    />
+                      className="status-badge"
+                      style={{ color: getStatusColor(app.status) }}
+                    >
+                      {app.status}
+                    </div>
                   </div>
 
+                  <div className="application-details">
+                    <div className="detail-row">
+                      <span>Program</span>
+                      <span>{app.program}</span>
+                    </div>
+                    <div className="detail-row">
+                      <span>Type</span>
+                      <span>{app.type}</span>
+                    </div>
+                    <div className="detail-row">
+                      <span>Semester</span>
+                      <span>{app.semester}</span>
+                    </div>
+                    <div className="detail-row">
+                      <span>Deadline</span>
+                      <span>{app.deadline || 'Not set'}</span>
+                    </div>
+                  </div>
+
+                  <div className="progress-section">
+                    <div className="progress-label">
+                      <span>Progress</span>
+                      <span>{app.progress || 0}%</span>
+                    </div>
+                    <div className="progress-bar">
+                      <div
+                        className="progress-fill"
+                        style={{ width: `${app.progress || 0}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="card-actions">
+                    <button
+                      className="edit-btn"
+                      onClick={() => editApplication(app)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="delete-btn"
+                      onClick={() => deleteApplication(appId)}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
-
-                {/* ACTIONS */}
-                <div className="card-actions">
-
-                  <button
-                    className="edit-btn"
-                    onClick={() =>
-                      editApplication(app)
-                    }
-                  >
-                    Edit
-                  </button>
-
-                  <button
-                    className="delete-btn"
-                    onClick={() =>
-                      deleteApplication(app.id)
-                    }
-                  >
-                    Delete
-                  </button>
-
-                </div>
-
-              </div>
-            ))}
+              )
+            })}
 
           </div>
         )}

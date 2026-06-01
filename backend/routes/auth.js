@@ -121,3 +121,4 @@ router.put('/profile', verifyToken, async (req, res) => {
 
 // CRUCIAL: Export the router so server.js can import it
 module.exports = router;
+module.exports.verifyToken = verifyToken;

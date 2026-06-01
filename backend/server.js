@@ -19,10 +19,12 @@ mongoose.connect(mongoDBURL)
 
 // 1. Import your custom auth router
 const authRoutes = require('./routes/auth')
+const applicationsRoutes = require('./routes/applications')
 const universitiesRoutes = require('./routes/universities')
 
 // 2. Link the routers to specific URL paths
 app.use('/api/auth', authRoutes)
+app.use('/api/applications', applicationsRoutes)
 app.use('/api/universities', universitiesRoutes)
 
 // Use port 5000 for API server (frontend fetches http://localhost:5000)

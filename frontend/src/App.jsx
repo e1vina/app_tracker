@@ -17,29 +17,29 @@ const App = () => {
   return (
     <div className="app-root">
       <div className="app-content">
-      <MouseGlow />
-      <div className="app-ui">
-      <Router>
-        <Routes>
-          <Route element={<Layout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/faq" element={<Faq />} />
-          </Route>
+        <MouseGlow />
+        <div className="app-ui">
+          <Router>
+            <Routes>
+              <Route element={<Layout />}>
+                <Route path="/" element={<Home />} />
+                <Route path="/faq" element={<Faq />} />
+              </Route>
 
-          <Route element={<DashLayout />}>
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/universities" element={<Universities />} />
-            <Route path="/application" element={<Application />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/application/new" element={<AddApplication />} />
-            <Route path="/application/edit" element={<EditApplication />} />
-          </Route>
+              <Route element={<DashLayout />}>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/universities" element={<Universities />} />
+                <Route path="/application" element={<Application />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/application/new" element={<AddApplication />} />
+                <Route path="/application/edit/:id" element={<EditApplication />} />
+              </Route>
 
-          <Route path="/login" element={<LogIn />} />
-          <Route path="/signup" element={<SignUp />} />
-        </Routes>
-      </Router>
-      </div>
+              <Route path="/login" element={<LogIn />} />
+              <Route path="/signup" element={<SignUp />} />
+            </Routes>
+          </Router>
+        </div>
       </div>
     </div>
   );
