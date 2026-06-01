@@ -51,6 +51,20 @@
   font-size: 1.1rem;
 }
 
+
+[data-theme="dark"] .about {
+  font-size: clamp(2.75rem, 6vw, 3.25rem);
+}
+
+[data-theme="dark"] .card h3 {
+  font-size: 1.3rem;
+}
+
+[data-theme="dark"] .card p {
+  font-size: 1rem;
+  color: #d8d4ec;
+}
+
 @media (max-width: 900px) {
   .card-container {
     grid-template-columns: repeat(2, 1fr);
@@ -65,18 +79,4 @@
   .card-container {
     grid-template-columns: 1fr;
   }
-}
-
-/* Dark theme color overrides */
-[data-theme="dark"] .about {
-  font-size: clamp(2.75rem, 6.5vw, 3.5rem);
-}
-
-[data-theme="dark"] .card h3 {
-  font-size: 1.6rem;
-}
-
-[data-theme="dark"] .card p {
-  font-size: 1.2rem;
-  color: #d8d4ec;
 }

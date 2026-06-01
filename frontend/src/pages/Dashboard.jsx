@@ -5,7 +5,9 @@ const Dashboard = () => {
   const [applications, setApplications] = useState([])
   const [firstName, setFirstName] = useState("there")
 
+  // Fetch user name from backend
   useEffect(() => {
+<<<<<<< HEAD
     const fetchApplications = async () => {
       const token = localStorage.getItem('token')
       if (!token) return
@@ -45,6 +47,32 @@ const Dashboard = () => {
   }, [])
 
   // stats
+=======
+    const fetchUser = async () => {
+      try {
+        const token = localStorage.getItem("token")
+        if (!token) return
+        const res = await fetch("/api/auth/profile", {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        if (res.ok) {
+          const userData = await res.json()
+          setFirstName(userData.firstName || "there")
+        }
+      } catch (err) {
+        console.error("Error fetching user:", err)
+      }
+    }
+    fetchUser()
+  }, [])
+
+
+ useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem("applications")) || []
+    setApplications(saved)
+  }, [])
+
+>>>>>>> 4c05a0c33c0d4bdedc774345db1c794b62cbc73b
   const total = applications.length
   const accepted = applications.filter(a => a.status === "Accepted").length
   const inProgress = applications.filter(a => a.status === "Applied" || a.status === "Planned").length
@@ -68,7 +96,6 @@ const Dashboard = () => {
     { number: nextDays !== null ? `${nextDays}d` : "—", label: "Next deadline", color: "#A32D2D" },
   ]
 
-  // badges
   const badgeClass = {
     Accepted: "badge-green",
     Applied: "badge-blue",
@@ -77,7 +104,6 @@ const Dashboard = () => {
     Rejected: "badge-red",
   }
 
-  //flags
   const flagMap = {
     Belgium: "🇧🇪", Sweden: "🇸🇪", Netherlands: "🇳🇱",
     Germany: "🇩🇪", France: "🇫🇷", Italy: "🇮🇹",
@@ -89,24 +115,20 @@ const Dashboard = () => {
     "Czech Republic": "🇨🇿",
   }
 
-  // Recent: last 5 added, newest first
   const recentApps = [...applications].reverse().slice(0, 5)
-
-  // Upcoming: next 3 deadlines
   const upcomingDeadlines = upcomingSorted.slice(0, 3)
   const deadlineColors = ["#A32D2D", "#633806", "#27500A"]
 
   const formatDate = (dateStr) =>
     new Date(dateStr).toLocaleDateString("en-US", { month: "long", day: "numeric" })
 
-  // Greeting
   const hour = new Date().getHours()
   const greeting = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening"
 
   return (
     <div className="dashboard">
 
-      <div className="greeting ">
+      <div className="greeting">
         <h2>{greeting}, {firstName} 👋</h2>
         <p className="zen-tokyo-zoo-regular">
           {nextDays !== null
@@ -125,10 +147,8 @@ const Dashboard = () => {
       </div>
 
       <div className="panels">
-
         <div className="panel">
           <div className="panel-title">Recent applications</div>
-
           {recentApps.length === 0 ? (
             <p style={{ color: "#999", fontSize: "0.9rem" }}>No applications yet.</p>
           ) : (
@@ -151,7 +171,6 @@ const Dashboard = () => {
 
         <div className="panel">
           <div className="panel-title">Upcoming deadlines</div>
-
           {upcomingDeadlines.length === 0 ? (
             <p style={{ color: "#999", fontSize: "0.9rem" }}>No upcoming deadlines.</p>
           ) : (
@@ -175,7 +194,6 @@ const Dashboard = () => {
             })
           )}
         </div>
-
       </div>
     </div>
   )
