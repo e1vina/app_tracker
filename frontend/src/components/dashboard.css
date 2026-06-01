@@ -220,6 +220,64 @@
   font-weight: 500;
 }
 
+/* Dark theme color overrides */
+[data-theme="dark"] .greeting h2 {
+  font-size: 2.0rem;
+}
+
+[data-theme="dark"] .greeting p {
+  font-size: var(--text-md);
+}
+
+[data-theme="dark"] .stat-number {
+  font-size: 2.8rem;
+}
+
+[data-theme="dark"] .stat-label {
+  font-size: var(--text-sm);
+  color: #d8d4ec;
+}
+
+[data-theme="dark"] .panel-title {
+  color: #c8c2ff;
+}
+
+[data-theme="dark"] .app-name {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .app-prog {
+  color: #d8d4ec;
+}
+
+[data-theme="dark"] .badge-green {
+  color: #b8e8a3;
+  background: #2d4620;
+}
+
+[data-theme="dark"] .badge-blue {
+  color: #90d5ff;
+  background: #1a3a5c;
+}
+
+[data-theme="dark"] .badge-amber {
+  color: #ffd89b;
+  background: #4a2f0a;
+}
+
+[data-theme="dark"] .badge-red {
+  color: #ff9999;
+  background: #4a2020;
+}
+
+[data-theme="dark"] .deadline-name {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .deadline-date {
+  color: #d8d4ec;
+}
+
 @media (max-width: 866px) {
   .greeting {
     flex-direction: column;
@@ -319,62 +377,4 @@
   .deadline-row {
     padding: 1rem;
   }
-}
-
-/* Dark theme color overrides */
-[data-theme="dark"] .greeting h2 {
-  font-size: 2.3rem;
-}
-
-[data-theme="dark"] .greeting p {
-  font-size: var(--text-md);
-}
-
-[data-theme="dark"] .stat-number {
-  font-size: 2.8rem;
-}
-
-[data-theme="dark"] .stat-label {
-  font-size: var(--text-sm);
-  color: #d8d4ec;
-}
-
-[data-theme="dark"] .panel-title {
-  color: #c8c2ff;
-}
-
-[data-theme="dark"] .app-name {
-  color: #ffffff;
-}
-
-[data-theme="dark"] .app-prog {
-  color: #d8d4ec;
-}
-
-[data-theme="dark"] .badge-green {
-  color: #b8e8a3;
-  background: #2d4620;
-}
-
-[data-theme="dark"] .badge-blue {
-  color: #90d5ff;
-  background: #1a3a5c;
-}
-
-[data-theme="dark"] .badge-amber {
-  color: #ffd89b;
-  background: #4a2f0a;
-}
-
-[data-theme="dark"] .badge-red {
-  color: #ff9999;
-  background: #4a2020;
-}
-
-[data-theme="dark"] .deadline-name {
-  color: #ffffff;
-}
-
-[data-theme="dark"] .deadline-date {
-  color: #d8d4ec;
 }

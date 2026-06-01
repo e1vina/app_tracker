@@ -4,47 +4,63 @@ import "../components/dashboard.css"
 const Dashboard = () => {
   const [applications, setApplications] = useState([])
   const [firstName, setFirstName] = useState("there")
+  const [loading, setLoading] = useState(true) // Added loading state for smooth UX
 
-  // Fetch user name from backend
+  // Fetch user name and applications from backend
   useEffect(() => {
-    const fetchUser = async () => {
+    const fetchData = async () => {
       try {
         const token = localStorage.getItem("token")
         if (!token) return
-        const res = await fetch("/api/auth/profile", {
+
+        // 1. Fetch User Profile
+        const userRes = await fetch("/api/auth/profile", {
           headers: { Authorization: `Bearer ${token}` },
         })
-        if (res.ok) {
-          const userData = await res.json()
+        if (userRes.ok) {
+          const userData = await userRes.json()
           setFirstName(userData.firstName || "there")
         }
+
+        // 2. Fetch Live Applications (Fixes the missing deadline bug)
+        const appRes = await fetch("/api/applications", {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        if (appRes.ok) {
+          const appData = await appRes.json()
+          setApplications(appData)
+        }
       } catch (err) {
-        console.error("Error fetching user:", err)
+        console.error("Error fetching dashboard data:", err)
+      } finally {
+        setLoading(false)
       }
     }
-    fetchUser()
-  }, [])
-
-
- useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("applications")) || []
-    setApplications(saved)
+    
+    fetchData()
   }, [])
 
   const total = applications.length
   const accepted = applications.filter(a => a.status === "Accepted").length
   const inProgress = applications.filter(a => a.status === "Applied" || a.status === "Planned").length
 
+  // Normalize midnight to prevent day-calculation shifting bugs
   const today = new Date()
+  today.setHours(0, 0, 0, 0)
 
   const upcomingSorted = applications
     .filter(a => a.deadline)
     .map(a => ({ ...a, _date: new Date(a.deadline) }))
-    .filter(a => a._date >= today)
+    .filter(a => {
+      // Keep deadline if it's today or in the future
+      const targetDate = new Date(a._date)
+      targetDate.setHours(0, 0, 0, 0)
+      return targetDate >= today
+    })
     .sort((a, b) => a._date - b._date)
 
   const nextDays = upcomingSorted.length > 0
-    ? Math.ceil((upcomingSorted[0]._date - today) / (1000 * 60 * 60 * 24))
+    ? Math.ceil((upcomingSorted[0]._date - new Date()) / (1000 * 60 * 60 * 24))
     : null
 
   const stats = [
@@ -78,14 +94,17 @@ const Dashboard = () => {
   const deadlineColors = ["#A32D2D", "#633806", "#27500A"]
 
   const formatDate = (dateStr) =>
-    new Date(dateStr).toLocaleDateString("en-US", { month: "long", day: "numeric" })
+    new Date(dateStr).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })
 
   const hour = new Date().getHours()
   const greeting = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening"
 
+  if (loading) {
+    return <div className="dashboard" style={{ padding: "2rem", color: "#666" }}>Loading your dashboard...</div>
+  }
+
   return (
     <div className="dashboard">
-
       <div className="greeting">
         <h2>{greeting}, {firstName} 👋</h2>
         <p className="zen-tokyo-zoo-regular">
@@ -111,7 +130,7 @@ const Dashboard = () => {
             <p style={{ color: "#999", fontSize: "0.9rem" }}>No applications yet.</p>
           ) : (
             recentApps.map((a) => (
-              <div className="app-row" key={a.id}>
+              <div className="app-row" key={a._id || a.id}>
                 <div className="app-flag">
                   {a.flag || flagMap[a.country] || "🏳️"}
                 </div>
@@ -133,15 +152,15 @@ const Dashboard = () => {
             <p style={{ color: "#999", fontSize: "0.9rem" }}>No upcoming deadlines.</p>
           ) : (
             upcomingDeadlines.map((d, i) => {
-              const daysLeft = Math.ceil((d._date - today) / (1000 * 60 * 60 * 24))
+              const daysLeft = Math.ceil((d._date - new Date()) / (1000 * 60 * 60 * 24))
               const color = deadlineColors[i]
               return (
-                <div className="deadline-row" key={d.id}>
+                <div className="deadline-row" key={d._id || d.id}>
                   <div
                     className="deadline-days"
                     style={{ color, background: color + "18" }}
                   >
-                    {daysLeft}d
+                    {daysLeft <= 0 ? "Today" : `${daysLeft}d`}
                   </div>
                   <div>
                     <div className="deadline-name">{d.universityName}</div>
