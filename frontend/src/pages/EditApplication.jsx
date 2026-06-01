@@ -1,29 +1,66 @@
-import { useState } from "react"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import "../components/editApplication.css"
 
 const EditApplication = () => {
   const location = useLocation()
   const navigate = useNavigate()
+  const { id } = useParams()
+  const [formData, setFormData] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
-  const app = location.state?.app
+  useEffect(() => {
+    const loadApplication = async () => {
+      const existingApp = location.state?.app
+      if (existingApp) {
+        setFormData({
+          ...existingApp,
+          checklist: existingApp.checklist || {},
+          programs: existingApp.programs || [],
+        })
+        setLoading(false)
+        return
+      }
 
-  if (!app) {
-    return (
-      <div style={{ padding: "20px" }}>
-        <h2>No application found</h2>
-        <button onClick={() => navigate("/application")}>
-          Go back
-        </button>
-      </div>
-    )
-  }
+      if (!id) {
+        setError('Application ID is missing')
+        setLoading(false)
+        return
+      }
 
-  const [formData, setFormData] = useState({
-    ...app,
-    checklist: app.checklist || {},
-    programs: app.programs || [],
-  })
+      const token = localStorage.getItem('token')
+      if (!token) {
+        navigate('/login')
+        return
+      }
+
+      try {
+        const res = await fetch(`/api/applications/${id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        if (!res.ok) {
+          const data = await res.json()
+          setError(data.message || 'Application not found')
+          setLoading(false)
+          return
+        }
+        const data = await res.json()
+        setFormData({
+          ...data,
+          checklist: data.checklist || {},
+          programs: data.programs || [],
+        })
+      } catch (fetchError) {
+        console.error(fetchError)
+        setError('Network error while loading application')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadApplication()
+  }, [id, location.state, navigate])
 
   const handleChange = (e) => {
     setFormData({
@@ -49,7 +86,7 @@ const EditApplication = () => {
     return Math.round((checked / items.length) * 100)
   }
 
-  const handleSave = (e) => {
+  const handleSave = async (e) => {
     e.preventDefault()
 
     const progress = calculateProgress(formData.checklist)
@@ -58,19 +95,54 @@ const EditApplication = () => {
       progress,
     }
 
-    const existing =
-      JSON.parse(localStorage.getItem("applications")) || []
+    const token = localStorage.getItem('token')
+    if (!token) {
+      navigate('/login')
+      return
+    }
 
-    const updated = existing.map((a) =>
-      a.id === formData.id ? updatedFormData : a
+    try {
+      const res = await fetch(`/api/applications/${id || formData._id || formData.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(updatedFormData),
+      })
+
+      const data = await res.json()
+      if (!res.ok) {
+        alert(data.message || 'Could not save application')
+        return
+      }
+
+      navigate('/application')
+    } catch (error) {
+      console.error(error)
+      alert('Network error while saving application')
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="add-app-wrapper">
+        <div className="add-app-page">
+          <p>Loading application…</p>
+        </div>
+      </div>
     )
+  }
 
-    localStorage.setItem(
-      "applications",
-      JSON.stringify(updated)
+  if (error || !formData) {
+    return (
+      <div style={{ padding: '20px' }}>
+        <h2>{error || 'No application found'}</h2>
+        <button onClick={() => navigate('/application')}>
+          Go back
+        </button>
+      </div>
     )
-
-    navigate("/application")
   }
 
   return (

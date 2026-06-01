@@ -3,14 +3,46 @@ import "../components/dashboard.css"
 
 const Dashboard = () => {
   const [applications, setApplications] = useState([])
+  const [firstName, setFirstName] = useState("there")
 
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("applications")) || []
-    setApplications(saved)
-  }, [])
+    const fetchApplications = async () => {
+      const token = localStorage.getItem('token')
+      if (!token) return
 
-  const stored = JSON.parse(localStorage.getItem("user"))
-  const firstName = stored?.firstName || "there"
+      try {
+        const res = await fetch('/api/applications', {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        if (res.ok) {
+          const data = await res.json()
+          setApplications(data)
+        }
+      } catch (error) {
+        console.error('Error loading applications:', error)
+      }
+    }
+
+    const fetchProfile = async () => {
+      const token = localStorage.getItem('token')
+      if (!token) return
+
+      try {
+        const res = await fetch('/api/auth/profile', {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        if (res.ok) {
+          const userData = await res.json()
+          setFirstName(userData.firstName || 'there')
+        }
+      } catch (error) {
+        console.error('Error loading profile:', error)
+      }
+    }
+
+    fetchApplications()
+    fetchProfile()
+  }, [])
 
   // stats
   const total = applications.length

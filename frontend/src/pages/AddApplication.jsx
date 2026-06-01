@@ -62,18 +62,42 @@ const AddApplication = () => {
   const progressPercent = Math.round((checkedCount / totalCount) * 100)
   const isComplete = progressPercent === 100
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    const existing = JSON.parse(localStorage.getItem("applications")) || []
+
+    const token = localStorage.getItem('token')
+    if (!token) {
+      navigate('/login')
+      return
+    }
+
     const newApp = {
-      id: Date.now(),
       ...formData,
       programs: university?.programs || formData.programs || [],
       progress: progressPercent,
-      createdAt: new Date().toISOString(),
     }
-    localStorage.setItem("applications", JSON.stringify([...existing, newApp]))
-    navigate("/application")
+
+    try {
+      const res = await fetch('/api/applications', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(newApp),
+      })
+
+      const data = await res.json()
+      if (!res.ok) {
+        alert(data.message || 'Could not save application')
+        return
+      }
+
+      navigate('/application')
+    } catch (error) {
+      console.error(error)
+      alert('Network error while saving application')
+    }
   }
 
   return (
