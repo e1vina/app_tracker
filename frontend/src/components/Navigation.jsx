@@ -55,7 +55,7 @@ const Navigation = () => {
 
   const authLinks = isLoggedIn
     ? [
-        { to: "/#", label: "Dashboard" },
+        { to: "/dashboard", label: "Dashboard" },
         {
           to: "/profile",
           label: initials || "Profile",
