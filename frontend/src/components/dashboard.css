@@ -22,6 +22,7 @@
   color: #ffffff;
   margin-bottom: 2.5rem;
   box-shadow: 0 10px 30px rgba(85, 68, 212, 0.15);
+  opacity: 0.95;
 }
 
 .greeting h2{
@@ -32,6 +33,7 @@
   font-family: "Ubuntu", sans-serif;
   font-weight: 700;
   font-style: normal;
+  /* opacity: 0.95; */
 }
 
 .greeting p .zen-tokyo-zoo-regular {
@@ -226,7 +228,7 @@
 }
 
 [data-theme="dark"] .greeting p {
-  font-size: var(--text-md);
+  font-size: var(--text-base);
 }
 
 [data-theme="dark"] .stat-number {
