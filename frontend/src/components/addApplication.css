@@ -343,16 +343,6 @@
   background: #3C3489;
 }
 
-@media (max-width: 768px) {
-  .form-cards-row {
-    grid-template-columns: 1fr;
-  }
-
-  .form-row {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* Dark theme color overrides */
 [data-theme="dark"] .back-btn {
   border-color: #7c6ff0;
@@ -388,6 +378,7 @@
   border-color: #534ab7;
   background: var(--input-bg);
   color: #ffffff;
+  font-size: 13px;
 }
 
 [data-theme="dark"] .form-group input:focus,
@@ -447,4 +438,14 @@
 
 [data-theme="dark"] .cancel-btn:hover {
   background: #2d2650;
+}
+
+@media (max-width: 768px) {
+  .form-cards-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
 }
