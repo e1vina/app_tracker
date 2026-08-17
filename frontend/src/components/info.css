@@ -1,6 +1,6 @@
 #info {
   background-color: var(--info-bg);
-  padding: 88px 24px;
+  padding: 32px 20px;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -11,57 +11,57 @@
 
 .about-heading {
   text-align: center;
-  margin-bottom: 52px;
+  margin-bottom: 24px;
 }
 
 .about {
   color: var(--info-heading);
-  font-size: clamp(2.5rem, 6vw, 3.25rem);
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
   font-weight: 900;
 }
 
 .card-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  gap: 16px;
 }
 
 .card {
   background: var(--card-bg);
-  border-radius: 16px;
-  padding: 32px 28px;
+  border-radius: 12px;
+  padding: 16px 14px;
   box-shadow: 0 2px 12px rgba(83, 74, 183, 0.08);
 }
 
 .icon-image {
-  height: 72px;
-  width: 72px;
+  height: 40px;
+  width: 40px;
 }
 
 .card h3 {
-  font-size: 1.45rem;
+  font-size: 1.05rem;
   color: var(--info-heading);
   font-weight: 800;
-  margin: 18px 0 12px;
+  margin: 10px 0 6px;
 }
 
 .card p {
-  line-height: 1.65;
+  line-height: 1.45;
   color: var(--text-secondary);
-  font-size: 1.1rem;
+  font-size: 0.85rem;
 }
 
 
 [data-theme="dark"] .about {
-  font-size: clamp(2.75rem, 6vw, 3.25rem);
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
 }
 
 [data-theme="dark"] .card h3 {
-  font-size: 1.3rem;
+  font-size: 1.05rem;
 }
 
 [data-theme="dark"] .card p {
-  font-size: 1rem;
+  font-size: 0.85rem;
   color: #d8d4ec;
 }
 

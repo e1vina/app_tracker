@@ -1,10 +1,35 @@
 import "./log.css";
 import image from "../assets/logo_light.svg";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import gsap from "gsap";
 
 const Log = () => {
   const navigate = useNavigate();
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(".split-text > *", {
+        x: -30,
+        opacity: 0,
+        stagger: 0.08,
+        duration: 0.7,
+        ease: "power2.out",
+      });
+
+      gsap.from(".auth-panel", {
+        x: 35,
+        opacity: 0,
+        scale: 0.94,
+        duration: 0.8,
+        delay: 0.2,
+        ease: "back.out(1.4)",
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -26,7 +51,6 @@ const Log = () => {
         })
         const data = await res.json()
         if (res.ok) {
-          // store token and userId
           if (data.token) {
             localStorage.setItem('token', data.token)
             localStorage.setItem('userId', data.userId)
@@ -43,7 +67,7 @@ const Log = () => {
   };
 
   return (
-    <div className="container-section">
+    <div className="container-section" ref={containerRef}>
       <div className="split-text">
         <div className="split-logo">
           <img src={image} alt="logo" className="logo-image" />

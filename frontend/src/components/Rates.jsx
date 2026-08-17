@@ -75,8 +75,24 @@ const RateItem = ({ target, suffix, label }) => {
 }
 
 const Rates = () => {
+  const containerRef = useRef(null)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(".stat-item", {
+        y: 25,
+        opacity: 0,
+        stagger: 0.12,
+        duration: 0.8,
+        ease: "power2.out",
+      })
+    }, containerRef)
+
+    return () => ctx.revert()
+  }, [])
+
   return (
-    <div className="stats-section">
+    <div className="stats-section" ref={containerRef}>
       {rates.map((r, i) => (
         <RateItem key={i} target={r.target} suffix={r.suffix} label={r.label} />
       ))}

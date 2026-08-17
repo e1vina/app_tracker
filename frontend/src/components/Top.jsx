@@ -1,8 +1,40 @@
+import { useEffect, useRef } from "react"
+import gsap from "gsap"
 import "./top.css"
 
 const Top = () => {
+  const compRef = useRef(null)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(".Track, .all", {
+        y: 25,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+      })
+      gsap.from(".subtext", {
+        y: 20,
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.3,
+        ease: "power3.out",
+      })
+      gsap.from(".hero_tag", {
+        scale: 0.85,
+        opacity: 0,
+        duration: 0.6,
+        delay: 0.45,
+        ease: "back.out(1.7)",
+      })
+    }, compRef)
+
+    return () => ctx.revert()
+  }, [])
+
   return (
-    <div className="Top">
+    <div className="Top" ref={compRef}>
       <p className="Track">Track every study abroad application,</p>
       <p className="all">all in one place.</p>
 

@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
+import gsap from "gsap"
 import "../components/dashboard.css"
 
 const Dashboard = () => {
   const [applications, setApplications] = useState([])
   const [firstName, setFirstName] = useState("there")
-  const [loading, setLoading] = useState(true) // Added loading state for smooth UX
+  const [loading, setLoading] = useState(true)
+  const dashRef = useRef(null)
 
   // Fetch user name and applications from backend
   useEffect(() => {
@@ -22,7 +24,7 @@ const Dashboard = () => {
           setFirstName(userData.firstName || "there")
         }
 
-        // 2. Fetch Live Applications (Fixes the missing deadline bug)
+        // 2. Fetch Live Applications
         const appRes = await fetch("/api/applications", {
           headers: { Authorization: `Bearer ${token}` },
         })
@@ -40,11 +42,54 @@ const Dashboard = () => {
     fetchData()
   }, [])
 
+  // Animate elements once loaded
+  useEffect(() => {
+    if (loading) return
+
+    const ctx = gsap.context(() => {
+      gsap.from(".greeting", {
+        y: -20,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.out",
+      })
+
+      gsap.from(".stat-card", {
+        y: 25,
+        scale: 0.92,
+        opacity: 0,
+        stagger: 0.08,
+        duration: 0.6,
+        delay: 0.2,
+        ease: "back.out(1.4)",
+      })
+
+      gsap.from(".panel", {
+        y: 30,
+        opacity: 0,
+        stagger: 0.15,
+        duration: 0.7,
+        delay: 0.35,
+        ease: "power2.out",
+      })
+
+      gsap.from(".app-row, .deadline-row", {
+        x: -15,
+        opacity: 0,
+        stagger: 0.06,
+        duration: 0.5,
+        delay: 0.5,
+        ease: "power2.out",
+      })
+    }, dashRef)
+
+    return () => ctx.revert()
+  }, [loading])
+
   const total = applications.length
   const accepted = applications.filter(a => a.status === "Accepted").length
   const inProgress = applications.filter(a => a.status === "Applied" || a.status === "Planned").length
 
-  // Normalize midnight to prevent day-calculation shifting bugs
   const today = new Date()
   today.setHours(0, 0, 0, 0)
 
@@ -52,7 +97,6 @@ const Dashboard = () => {
     .filter(a => a.deadline)
     .map(a => ({ ...a, _date: new Date(a.deadline) }))
     .filter(a => {
-      // Keep deadline if it's today or in the future
       const targetDate = new Date(a._date)
       targetDate.setHours(0, 0, 0, 0)
       return targetDate >= today
@@ -104,7 +148,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="dashboard">
+    <div className="dashboard" ref={dashRef}>
       <div className="greeting">
         <h2>{greeting}, {firstName} 👋</h2>
         <p className="zen-tokyo-zoo-regular">

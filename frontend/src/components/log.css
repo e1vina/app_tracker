@@ -1,16 +1,16 @@
 .split-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 1.6rem;
+  gap: 8px;
+  font-size: 1.2rem;
   font-family: "Anton", sans-serif;
   color: #000000;
-  margin: 10px 7px;
+  margin: 6px 4px;
 }
 
 .split-logo .logo-image {
-  height: 56px;
-  width: 56px;
+  height: 36px;
+  width: 36px;
 }
 
 .container-section {
@@ -22,12 +22,12 @@
 .split-text {
   background: #534ab7;
   color: #eeedfe;
-  padding: 56px 40px 64px;
+  padding: 32px 28px 40px;
 }
 
 .split-text h2 {
-  font-size: clamp(1.6rem, 4.5vw, 2.25rem);
-  margin-bottom: 12px;
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  margin-bottom: 8px;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 800;
   text-shadow: #39065c 1px 1px 2px;
@@ -35,22 +35,22 @@
 }
 
 .split-text p {
-  font-size: 1.1rem;
-  margin-bottom: 22px;
+  font-size: 0.9rem;
+  margin-bottom: 14px;
 }
 
 .pick {
-  line-height: 1.65;
-  font-size: 1.15rem;
+  line-height: 1.5;
+  font-size: 0.92rem;
 }
 
 .text-body {
-  font-size: 1rem;
-  padding: 10px 16px;
+  font-size: 0.82rem;
+  padding: 6px 12px;
   border-radius: 999px;
   background: #ffffff1f;
   color: #e8e6ff;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   width: fit-content;
 }
 
@@ -59,25 +59,34 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 64px 48px 80px;
-  background-color: transparent;
+  padding: 32px 24px 40px;
+  background-image: linear-gradient(135deg, rgba(15, 12, 35, 0.35), rgba(50, 40, 110, 0.25)), url("../assets/top.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .auth-panel {
   width: 100%;
-  max-width: 480px;
+  max-width: 400px;
   margin: 0 auto;
-  padding: 24px 32px 32px;
+  padding: 24px 26px 28px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.4);
 }
 
 .auth-panel h3 {
-  font-size: 2rem;
+  font-size: 1.35rem;
   font-weight: 800;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   color: var(--text-primary);
 }
 
@@ -87,9 +96,9 @@
 }
 
 .no-account {
-  font-size: 1.05rem;
-  margin-top: 6px;
-  margin-bottom: 20px;
+  font-size: 0.85rem;
+  margin-top: 4px;
+  margin-bottom: 12px;
   color: var(--text-secondary);
 }
 
@@ -106,23 +115,23 @@
 }
 
 .terms-note {
-  margin-top: 20px;
-  font-size: 0.95rem;
+  margin-top: 12px;
+  font-size: 0.8rem;
   color: #555560;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
 .input,
 .form-group input {
-  padding: 16px 18px;
+  padding: 8px 12px;
   margin: 0;
   width: 100%;
   box-sizing: border-box;
-  border-radius: 14px;
+  border-radius: 8px;
   outline: none;
   font-family: Arial, sans-serif;
-  font-size: 1.05rem;
-  border: 2px solid var(--border-color);
+  font-size: 0.85rem;
+  border: 1.5px solid var(--border-color);
   background: var(--card-bg);
   color: var(--text-primary);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -131,24 +140,24 @@
 .input:focus,
 .form-group input:focus {
   border-color: #534ab7;
-  box-shadow: 0 0 0 4px rgba(83, 74, 183, 0.15);
+  box-shadow: 0 0 0 3px rgba(83, 74, 183, 0.15);
 }
 
 .auth-panel form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
 }
 
 .signin-btn,
 .signup-btn {
   width: 100%;
-  padding: 16px 24px;
-  margin-top: 8px;
+  padding: 8px 16px;
+  margin-top: 6px;
   background: #534ab7;
   color: #ffffff;
   border: none;
-  font-size: 1.1rem;
+  font-size: 0.88rem;
   cursor: pointer;
   font-family: Arial, sans-serif;
 }
@@ -166,25 +175,25 @@
 
   .split-text {
     width: 42%;
-    max-width: 540px;
-    padding: 72px 64px 88px;
+    max-width: 460px;
+    padding: 40px 36px 48px;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
 
   .value-text {
-    padding: 72px 64px 88px;
+    padding: 40px 36px 48px;
   }
 
   .auth-panel {
-    padding: 32px 40px 40px;
+    padding: 20px 24px 28px;
   }
 }
 
 @media (max-width: 599px) {
   .split-text {
-    padding: 40px 28px 48px;
+    padding: 24px 20px 32px;
     text-align: center;
   }
 
@@ -198,15 +207,15 @@
   }
 
   .value-text {
-    padding: 48px 28px 64px;
+    padding: 24px 16px 36px;
   }
 
   .auth-panel {
-    padding: 20px 16px 28px;
+    padding: 16px 12px 20px;
   }
 
   .auth-panel h3 {
-    font-size: 1.75rem;
+    font-size: 1.2rem;
   }
 }
 
@@ -216,33 +225,39 @@
 }
 
 [data-theme="dark"] .split-text h2 {
-  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
   color: #ffffff;
   text-shadow: #1a0f2e 1px 1px 2px;
 }
 
 [data-theme="dark"] .split-text p {
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   color: #e8e6f4;
 }
 
 [data-theme="dark"] .pick {
-  font-size: 1.3rem;
+  font-size: 0.92rem;
   color: #e8e6f4;
 }
 
 [data-theme="dark"] .text-body {
   color: #e8e6f4;
-  font-size: 1.1rem;
+  font-size: 0.82rem;
+}
+
+[data-theme="dark"] .auth-panel {
+  background: rgba(24, 22, 35, 0.78);
+  border: 1px solid rgba(124, 111, 240, 0.35);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(124, 111, 240, 0.2);
 }
 
 [data-theme="dark"] .auth-panel h3 {
   color: #ffffff;
-  font-size: 2.2rem;
+  font-size: 1.35rem;
 }
 
 [data-theme="dark"] .no-account {
-  font-size: 1.15rem;
+  font-size: 0.85rem;
   color: #d8d4ec;
 }
 
@@ -253,13 +268,13 @@
 }
 
 [data-theme="dark"] .terms-note {
-  font-size: 1.05rem;
+  font-size: 0.8rem;
   color: #d8d4ec;
 }
 
 [data-theme="dark"] .input,
 [data-theme="dark"] .form-group input {
-  font-size: 1.15rem;
+  font-size: 0.85rem;
   border-color: #534ab7;
   color: #ffffff;
 }
@@ -267,12 +282,12 @@
 [data-theme="dark"] .input:focus,
 [data-theme="dark"] .form-group input:focus {
   border-color: #7c6ff0;
-  box-shadow: 0 0 0 4px rgba(124, 111, 240, 0.25);
+  box-shadow: 0 0 0 3px rgba(124, 111, 240, 0.25);
 }
 
 [data-theme="dark"] .signin-btn,
 [data-theme="dark"] .signup-btn {
-  font-size: 1.2rem;
+  font-size: 0.88rem;
   background: #7c6ff0;
 }
 

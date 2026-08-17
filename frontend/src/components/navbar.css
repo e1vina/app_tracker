@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
 
 :root {
-  --navbar-height: 72px;
+  --navbar-height: 52px;
 }
 
 .navbar {
@@ -15,8 +15,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 12px 24px;
+  gap: 12px;
+  padding: 6px 18px;
   background: var(--nav-bg);
   border-bottom: 1px solid var(--nav-border);
   font-family: Arial, Helvetica, sans-serif;
@@ -26,8 +26,8 @@
 .navbar-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 1.5rem;
+  gap: 8px;
+  font-size: 1.15rem;
   color: var(--nav-text);
   font-family: "Anton", sans-serif;
   text-decoration: none;
@@ -43,20 +43,20 @@
 }
 
 .navbar-logo-image {
-  height: 48px;
-  width: 48px;
+  height: 32px;
+  width: 32px;
 }
 
 .navbar-toggle {
   display: none;
   flex-direction: column;
   justify-content: center;
-  gap: 5px;
-  width: 48px;
-  height: 48px;
-  padding: 10px;
+  gap: 4px;
+  width: 36px;
+  height: 36px;
+  padding: 6px;
   border: none;
-  border-radius: 12px;
+  border-radius: 8px;
   background: transparent;
   cursor: pointer;
   z-index: 202;
@@ -69,15 +69,15 @@
 
 .navbar-toggle span {
   display: block;
-  width: 24px;
-  height: 2.5px;
+  width: 20px;
+  height: 2px;
   background: var(--nav-text);
   border-radius: 2px;
   transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
 .navbar-toggle.is-open span:nth-child(1) {
-  transform: translateY(7.5px) rotate(45deg);
+  transform: translateY(6px) rotate(45deg);
 }
 
 .navbar-toggle.is-open span:nth-child(2) {
@@ -85,7 +85,7 @@
 }
 
 .navbar-toggle.is-open span:nth-child(3) {
-  transform: translateY(-7.5px) rotate(-45deg);
+  transform: translateY(-6px) rotate(-45deg);
 }
 
 .navbar-overlay {
@@ -95,13 +95,13 @@
 .navbar-menu {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
 }
 
 .navbar-list {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 16px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -110,7 +110,7 @@
 .navbar-link {
   color: var(--nav-text);
   text-decoration: none;
-  font-size: var(--text-md);
+  font-size: var(--text-sm);
   font-weight: 500;
   white-space: nowrap;
   transition:
@@ -123,14 +123,14 @@
 
 .navbar-link:not(.log):not(.sign):not(.dash-avatar) {
   display: inline-block;
-  padding: 8px 14px;
-  border-radius: 10px;
+  padding: 5px 10px;
+  border-radius: 8px;
 }
 
 .navbar-link:not(.log):not(.sign):not(.dash-avatar):hover {
   color: var(--accent);
   background-color: var(--nav-link-hover-bg);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
   box-shadow: var(--nav-link-hover-glow);
 }
 
@@ -140,9 +140,9 @@
 
 .navbar-link.log,
 .navbar-link.sign {
-  padding: 8px 18px;
+  padding: 5px 14px;
   border-radius: 999px;
-  font-size: 0.95rem;
+  font-size: 0.82rem;
 }
 
 .navbar-link.log {

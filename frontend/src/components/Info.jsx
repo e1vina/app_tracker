@@ -45,9 +45,36 @@ const features = [
   },
 ]
 
+import { useEffect, useRef } from "react"
+import gsap from "gsap"
+
 const Info = () => {
+  const sectionRef = useRef(null)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(".about-heading", {
+        y: 20,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.out",
+      })
+
+      gsap.from(".card-container .card", {
+        y: 35,
+        opacity: 0,
+        scale: 0.95,
+        stagger: 0.1,
+        duration: 0.7,
+        ease: "power2.out",
+      })
+    }, sectionRef)
+
+    return () => ctx.revert()
+  }, [])
+
   return (
-    <section id="info">
+    <section id="info" ref={sectionRef}>
       <div className="info-inner">
         <div className="about-heading">
           <h2 className="about">About Us</h2>

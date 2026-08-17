@@ -3,33 +3,33 @@
 .foot-container {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1.5fr;
-    gap: 40px;
+    gap: 20px;
     background: #1A1A2E;
     color: #AFA9EC;
-    padding: 56px 64px;
+    padding: 24px 32px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 .tile h3 {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 700;
     color: #EEEDFE;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
 }
 
 .tile p {
-    font-size: 13px;
+    font-size: 11px;
     color: #AFA9EC;
-    line-height: 1.7;
-    margin-bottom: 8px;
+    line-height: 1.45;
+    margin-bottom: 6px;
 }
 
 .logo-image {
-    height: 24px;
-    width: 24px;
+    height: 20px;
+    width: 20px;
 }
 
 .qlist {
@@ -38,11 +38,11 @@
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 6px;
 }
 
 .qlist li {
-    font-size: 13px;
+    font-size: 11px;
     color: #AFA9EC;
     cursor: pointer;
 }
@@ -54,7 +54,7 @@
 .qlist .ref {
     color: #AFA9EC;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 11px;
 }
 
 .qlist .ref:hover {
@@ -64,8 +64,8 @@
 .foot-bottom {
     background: #1A1A2E;
     border-top: 0.5px solid #2D2D4E;
-    padding: 16px 64px;
-    font-size: 12px;
+    padding: 10px 32px;
+    font-size: 11px;
     color: #6B6B8A;
     font-family: Arial, sans-serif;
     text-align: center;

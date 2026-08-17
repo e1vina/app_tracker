@@ -1,51 +1,51 @@
 .faq-page {
   max-width: 860px;
   margin: 0 auto;
-  padding: 56px 24px 80px;
+  padding: 20px 16px 36px;
   font-family: "Inter", sans-serif;
   background: transparent;
-  min-height: 100vh;
+  min-height: auto;
 }
 
 .faq-hero {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .faq-hero h1 {
-  font-size: clamp(2.25rem, 5vw, 2.75rem);
+  font-size: clamp(1.4rem, 3.5vw, 1.8rem);
   font-weight: 700;
   letter-spacing: -0.04em;
   color: var(--text-primary);
-  margin-bottom: 14px;
+  margin-bottom: 8px;
 }
 
 .faq-hero p {
   max-width: 620px;
   margin: 0 auto;
-  font-size: var(--text-md);
-  line-height: 1.7;
+  font-size: var(--text-base);
+  line-height: 1.45;
   color: var(--text-secondary);
 }
 
 .faq-cats {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 38px;
+  margin-bottom: 20px;
 }
 
 .cat-btn {
-  height: 42px;
-  padding: 0 20px;
-  border-radius: 12px;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: 8px;
   border: 1px solid var(--faq-border);
   background: var(--faq-cat-bg);
   backdrop-filter: blur(8px);
   color: var(--text-secondary);
   cursor: pointer;
-  font-size: var(--text-sm);
+  font-size: 0.8rem;
   font-weight: 500;
   font-family: "Inter", sans-serif;
   transition: all 0.2s ease;
@@ -65,7 +65,7 @@
 }
 
 .faq-group {
-  margin-bottom: 34px;
+  margin-bottom: 20px;
 }
 
 .faq-group-label {
@@ -74,7 +74,7 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent-text);
-  margin-bottom: 14px;
+  margin-bottom: 8px;
   padding-left: 4px;
 }
 
@@ -82,8 +82,8 @@
   background: var(--faq-item-bg);
   backdrop-filter: blur(12px);
   border: 1px solid var(--faq-border);
-  border-radius: 18px;
-  margin-bottom: 12px;
+  border-radius: 10px;
+  margin-bottom: 8px;
   overflow: hidden;
   cursor: pointer;
   transition: all 0.22s ease;
@@ -104,27 +104,27 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 18px 20px;
+  gap: 12px;
+  padding: 10px 14px;
 }
 
 .faq-q-text {
-  font-size: var(--text-base);
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--text-primary);
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
 .faq-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
   background: var(--accent-soft);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  font-size: var(--text-lg);
+  font-size: 0.85rem;
   font-weight: 400;
   color: var(--accent);
   transition: all 0.22s ease;
@@ -136,24 +136,24 @@
 }
 
 .faq-a {
-  padding: 0 20px 20px;
+  padding: 0 14px 12px;
   border-top: 1px solid var(--border-light);
 }
 
 .faq-a p {
-  font-size: var(--text-sm);
-  line-height: 1.8;
+  font-size: 0.82rem;
+  line-height: 1.5;
   color: var(--text-secondary);
-  margin-top: 16px;
+  margin-top: 8px;
 }
 
 .still-q {
-  margin-top: 56px;
-  padding: 38px 32px;
+  margin-top: 28px;
+  padding: 20px 16px;
   text-align: center;
   background: linear-gradient(135deg, #5b4bdb14, #2563eb14);
   border: 1px solid var(--border-color);
-  border-radius: 28px;
+  border-radius: 16px;
   position: relative;
   overflow: hidden;
 }
@@ -171,18 +171,18 @@
 
 .still-q h3 {
   position: relative;
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .still-q p {
   position: relative;
-  font-size: var(--text-md);
-  line-height: 1.7;
+  font-size: var(--text-base);
+  line-height: 1.45;
   color: var(--text-secondary);
-  margin-bottom: 22px;
+  margin-bottom: 14px;
 }
 
 .contact-btn {
@@ -190,13 +190,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 48px;
-  padding: 0 26px;
-  border-radius: 14px;
+  height: 36px;
+  padding: 0 18px;
+  border-radius: 8px;
   background: linear-gradient(135deg, #5b4bdb, #2563eb);
   color: white;
   text-decoration: none;
-  font-size: var(--text-sm);
+  font-size: 0.82rem;
   font-weight: 600;
   font-family: "Inter", sans-serif;
   transition: all 0.22s ease;
