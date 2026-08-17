@@ -50,6 +50,15 @@ const Universities = () => {
   // Get user GPA from localStorage or backend
   useEffect(() => {
     const getUserGPA = async () => {
+      const getStoredUser = () => {
+        try {
+          const raw = localStorage.getItem("user")
+          return raw ? JSON.parse(raw) : null
+        } catch {
+          return null
+        }
+      }
+
       try {
         const token = localStorage.getItem("token")
         if (token) {
@@ -63,11 +72,11 @@ const Universities = () => {
           }
         }
         // fallback to localStorage
-        const stored = JSON.parse(localStorage.getItem("user"))
+        const stored = getStoredUser()
         if (stored?.gpa) setUserGPA(stored.gpa)
       } catch (err) {
         console.error("Could not fetch user GPA:", err)
-        const stored = JSON.parse(localStorage.getItem("user"))
+        const stored = getStoredUser()
         if (stored?.gpa) setUserGPA(stored.gpa)
       }
     }
@@ -78,7 +87,7 @@ const Universities = () => {
   useEffect(() => {
     let mounted = true
     setLoading(true)
-    fetch("http://localhost:5000/api/universities")
+    fetch("/api/universities")
       .then((res) => {
         if (!res.ok) throw new Error("Network response was not ok")
         return res.json()

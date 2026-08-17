@@ -128,8 +128,7 @@ const Profile = () => {
       <div className="profile-page">
         <div className="profile-header">
           <div className="profile-avatar">
-            {formData.firstName[0]}
-            {formData.lastName[0]}
+            {(formData.firstName?.[0] || "") + (formData.lastName?.[0] || "") || "👤"}
           </div>
           <div>
             <h2 className="profile-name">

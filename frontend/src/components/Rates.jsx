@@ -1,5 +1,6 @@
 import './rates.css'
 import { useState, useEffect, useRef } from "react"
+import gsap from "gsap"
 
 const rates = [
   { target: 2400, suffix: "+", label: "Students onboard" },

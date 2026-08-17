@@ -1,7 +1,7 @@
 import SignLogNavigation from "../components/SignLogNavigation"
 import Sign from "../components/Sign"
 
-const signUp = () => {
+const SignUp = () => {
   return (
     <div className="auth-page">
       <SignLogNavigation />
@@ -9,4 +9,4 @@ const signUp = () => {
     </div>
   )
 }
-export default signUp
+export default SignUp

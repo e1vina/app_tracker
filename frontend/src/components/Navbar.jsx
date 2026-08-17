@@ -97,8 +97,8 @@ const Navbar = ({ links }) => {
       <nav className={`navbar-menu${menuOpen ? " is-open" : ""}`}>
         <ThemeToggle />
         <ul className="navbar-list">
-          {links.map((link) => (
-            <li key={link.label}>
+          {links.map((link, idx) => (
+            <li key={typeof link.label === "string" ? link.label : (link.to || link.href || idx)}>
               <NavItem link={link} onNavigate={closeMenu} />
             </li>
           ))}

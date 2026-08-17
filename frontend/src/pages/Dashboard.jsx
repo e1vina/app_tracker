@@ -13,7 +13,10 @@ const Dashboard = () => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("token")
-        if (!token) return
+        if (!token) {
+          setLoading(false)
+          return
+        }
 
         // 1. Fetch User Profile
         const userRes = await fetch("/api/auth/profile", {
@@ -30,7 +33,7 @@ const Dashboard = () => {
         })
         if (appRes.ok) {
           const appData = await appRes.json()
-          setApplications(appData)
+          setApplications(Array.isArray(appData) ? appData : [])
         }
       } catch (err) {
         console.error("Error fetching dashboard data:", err)
@@ -173,8 +176,8 @@ const Dashboard = () => {
           {recentApps.length === 0 ? (
             <p style={{ color: "#999", fontSize: "0.9rem" }}>No applications yet.</p>
           ) : (
-            recentApps.map((a) => (
-              <div className="app-row" key={a._id || a.id}>
+            recentApps.map((a, idx) => (
+              <div className="app-row" key={a._id || a.id || idx}>
                 <div className="app-flag">
                   {a.flag || flagMap[a.country] || "🏳️"}
                 </div>
@@ -199,7 +202,7 @@ const Dashboard = () => {
               const daysLeft = Math.ceil((d._date - new Date()) / (1000 * 60 * 60 * 24))
               const color = deadlineColors[i]
               return (
-                <div className="deadline-row" key={d._id || d.id}>
+                <div className="deadline-row" key={d._id || d.id || i}>
                   <div
                     className="deadline-days"
                     style={{ color, background: color + "18" }}
