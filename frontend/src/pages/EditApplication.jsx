@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
 import { useLocation, useNavigate, useParams } from "react-router-dom"
+import { useToast } from "../context/ToastContext.jsx"
 import "../components/editApplication.css"
 
 const EditApplication = () => {
   const location = useLocation()
   const navigate = useNavigate()
+  const { showSuccess, showError } = useToast()
   const { id } = useParams()
   const [formData, setFormData] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -39,13 +41,12 @@ const EditApplication = () => {
         const res = await fetch(`/api/applications/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         })
+        const data = await res.json()
         if (!res.ok) {
-          const data = await res.json()
           setError(data.message || 'Application not found')
           setLoading(false)
           return
         }
-        const data = await res.json()
         setFormData({
           ...data,
           checklist: data.checklist || {},
@@ -113,14 +114,15 @@ const EditApplication = () => {
 
       const data = await res.json()
       if (!res.ok) {
-        alert(data.message || 'Could not save application')
+        showError(data.message || 'Could not save application')
         return
       }
 
+      showSuccess('Application updated successfully!')
       navigate('/application')
     } catch (error) {
       console.error(error)
-      alert('Network error while saving application')
+      showError('Network error while saving application')
     }
   }
 

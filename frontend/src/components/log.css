@@ -295,3 +295,47 @@
 [data-theme="dark"] .signup-btn:hover {
   background: #9589f5;
 }
+
+.password-input-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-wrapper input {
+  padding-right: 38px !important;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 8px;
+  background: transparent;
+  border: none;
+  padding: 4px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #666670;
+  opacity: 0.85;
+  transition: opacity 0.2s ease, color 0.2s ease;
+  z-index: 2;
+  width: auto;
+}
+
+.password-toggle-btn:hover {
+  opacity: 1;
+  color: #534ab7;
+  background: transparent;
+}
+
+[data-theme="dark"] .password-toggle-btn {
+  color: #bbb9d0;
+}
+
+[data-theme="dark"] .password-toggle-btn:hover {
+  color: #7c6ff0;
+  background: transparent;
+}

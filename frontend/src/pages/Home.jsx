@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react"
 import gsap from "gsap"
 import Top from "../components/Top"
 import Image from "../assets/top.png"
-import Rates from "../components/Rates"
 import Info from "../components/Info"
 import HomeProgramCard from "../components/HomeProgramCard"
 import Footer from "../components/Footer"
@@ -47,7 +46,6 @@ const Home = () => {
           <img src={Image} height={576} width={1024} alt="Study abroad application dashboard preview" />
         </div>
       </section>
-      <Rates />
       <Info />
       <HomeProgramCard />
       <Footer />

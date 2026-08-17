@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "../context/ToastContext.jsx";
 import "../components/profile.css";
 
 const Profile = () => {
   const navigate = useNavigate();
+  const { showSuccess, showError } = useToast();
   const [loading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -53,7 +55,7 @@ const Profile = () => {
         setOriginalFormData(newFormData);
       } catch (error) {
         console.error('Error fetching profile:', error);
-        alert('Failed to load profile');
+        showError('Failed to load profile');
         navigate('/login');
       } finally {
         setLoading(false);
@@ -83,7 +85,7 @@ const Profile = () => {
     try {
       const token = localStorage.getItem('token');
       if (!token) {
-        alert('No token found');
+        showError('No token found');
         navigate('/login');
         return;
       }
@@ -104,10 +106,10 @@ const Profile = () => {
       const result = await res.json();
       setOriginalFormData(formData);
       setIsEditing(false);
-      alert('Profile updated successfully!');
+      showSuccess('Profile updated successfully!');
     } catch (error) {
       console.error('Error updating profile:', error);
-      alert('Failed to update profile');
+      showError('Failed to update profile');
     } finally {
       setIsSaving(false);
     }
@@ -116,6 +118,7 @@ const Profile = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
+    showSuccess("Logged out successfully");
     navigate("/");
   };
 

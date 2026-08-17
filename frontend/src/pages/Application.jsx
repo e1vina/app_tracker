@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { useToast } from "../context/ToastContext.jsx"
 import "../components/application.css"
 
 const Application = () => {
   const navigate = useNavigate()
+  const { showSuccess, showError } = useToast()
   const [applications, setApplications] = useState([])
 
   useEffect(() => {
@@ -23,7 +25,7 @@ const Application = () => {
           return
         }
         const data = await res.json()
-        setApplications(data)
+        setApplications(Array.isArray(data) ? data : [])
       } catch (error) {
         console.error('Error loading applications:', error)
       }
@@ -35,6 +37,7 @@ const Application = () => {
   const deleteApplication = async (id) => {
     const token = localStorage.getItem('token')
     if (!token) {
+      showError('Session expired. Please log in again.')
       navigate('/login')
       return
     }
@@ -47,14 +50,15 @@ const Application = () => {
 
       if (!res.ok) {
         const data = await res.json()
-        alert(data.message || 'Could not delete application')
+        showError(data.message || 'Could not delete application')
         return
       }
 
       setApplications((current) => current.filter((app) => (app._id || app.id) !== id))
+      showSuccess('Application deleted successfully')
     } catch (error) {
       console.error('Error deleting application:', error)
-      alert('Network error while deleting application')
+      showError('Network error while deleting application')
     }
   }
 

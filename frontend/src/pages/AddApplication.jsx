@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
+import { useToast } from "../context/ToastContext.jsx"
 import "../components/addApplication.css"
 
 const defaultChecklist = {
@@ -27,6 +28,7 @@ const checklistLabels = {
 const AddApplication = () => {
   const location = useLocation()
   const navigate = useNavigate()
+  const { showSuccess, showError } = useToast()
   const university = location.state?.university || null
 
   const [formData, setFormData] = useState({
@@ -67,6 +69,7 @@ const AddApplication = () => {
 
     const token = localStorage.getItem('token')
     if (!token) {
+      showError('Session expired. Please log in again.')
       navigate('/login')
       return
     }
@@ -89,14 +92,15 @@ const AddApplication = () => {
 
       const data = await res.json()
       if (!res.ok) {
-        alert(data.message || 'Could not save application')
+        showError(data.message || 'Could not save application')
         return
       }
 
+      showSuccess('Application saved successfully!')
       navigate('/application')
     } catch (error) {
       console.error(error)
-      alert('Network error while saving application')
+      showError('Network error while saving application')
     }
   }
 

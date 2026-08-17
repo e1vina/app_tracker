@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const Application = require('../models/applicationModel');
 const { verifyToken } = require('./auth');
 
@@ -17,6 +18,10 @@ router.get('/', verifyToken, async (req, res) => {
 // GET /api/applications/:id - get a single application
 router.get('/:id', verifyToken, async (req, res) => {
     try {
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return res.status(400).json({ message: 'Invalid application ID format' });
+        }
+
         const application = await Application.findOne({ _id: req.params.id, user: req.userId });
         if (!application) {
             return res.status(404).json({ message: 'Application not found' });
@@ -32,11 +37,15 @@ router.post('/', verifyToken, async (req, res) => {
     try {
         const { universityName, country, program, type, status, deadline, semester, notes, checklist, flag, programs, progress } = req.body;
 
+        if (!universityName || !universityName.trim()) {
+            return res.status(400).json({ message: 'University name is required' });
+        }
+
         const existing = await Application.findOne({
             user: req.userId,
-            universityName,
-            program,
-            semester,
+            universityName: universityName.trim(),
+            program: program || '',
+            semester: semester || '',
         });
 
         if (existing) {
@@ -45,18 +54,18 @@ router.post('/', verifyToken, async (req, res) => {
 
         const application = new Application({
             user: req.userId,
-            universityName,
-            country,
-            program,
-            type,
-            status,
-            deadline,
-            semester,
-            notes,
-            checklist,
-            flag,
-            programs,
-            progress,
+            universityName: universityName.trim(),
+            country: country || '',
+            program: program || '',
+            type: type || 'Exchange',
+            status: status || 'Planned',
+            deadline: deadline || '',
+            semester: semester || '',
+            notes: notes || '',
+            checklist: checklist || {},
+            flag: flag || '🎓',
+            programs: Array.isArray(programs) ? programs : [],
+            progress: typeof progress === 'number' ? progress : 0,
         });
 
         await application.save();
@@ -72,12 +81,29 @@ router.post('/', verifyToken, async (req, res) => {
 // PUT /api/applications/:id - update an application and ensure it belongs to the current user
 router.put('/:id', verifyToken, async (req, res) => {
     try {
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return res.status(400).json({ message: 'Invalid application ID format' });
+        }
+
         const { universityName, country, program, type, status, deadline, semester, notes, checklist, flag, programs, progress } = req.body;
 
         const application = await Application.findOneAndUpdate(
             { _id: req.params.id, user: req.userId },
-            { universityName, country, program, type, status, deadline, semester, notes, checklist, flag, programs, progress },
-            { new: true, runValidators: true }
+            {
+                universityName,
+                country,
+                program,
+                type,
+                status,
+                deadline,
+                semester,
+                notes,
+                checklist,
+                flag,
+                programs,
+                progress
+            },
+            { returnDocument: 'after', runValidators: true }
         );
 
         if (!application) {
@@ -93,6 +119,10 @@ router.put('/:id', verifyToken, async (req, res) => {
 // DELETE /api/applications/:id - remove an application from the current user's list
 router.delete('/:id', verifyToken, async (req, res) => {
     try {
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return res.status(400).json({ message: 'Invalid application ID format' });
+        }
+
         const application = await Application.findOneAndDelete({ _id: req.params.id, user: req.userId });
         if (!application) {
             return res.status(404).json({ message: 'Application not found' });

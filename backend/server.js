@@ -1,6 +1,15 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const dns = require('dns');
+
+// Fix Windows DNS querySrv issues for MongoDB Atlas
+try {
+  dns.setServers(['8.8.8.8', '1.1.1.1']);
+} catch (e) {
+  console.warn("Could not set custom DNS servers:", e.message);
+}
+
 const app = express();
 
 // Import config
@@ -9,8 +18,8 @@ const { mongoDBURL } = require('./config/config');
 // Middleware to parse incoming JSON
 app.use(express.json());
 
-// Enable CORS for frontend dev server (Vite defaults to port 5173)
-app.use(cors({ origin: ['http://localhost:5173', 'http://localhost:5174'] }));
+// Enable CORS for frontend dev server (Vite defaults to port 5173, 5174, etc.)
+app.use(cors({ origin: true, credentials: true }));
 
 // Connect to MongoDB
 mongoose.connect(mongoDBURL)
